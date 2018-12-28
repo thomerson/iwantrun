@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>详情</title>
+
+    <link rel="stylesheet" href="css/mincss.css">
+    <link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+        <section class=" w100p bgcffffff  pb40">
+
+        </section>
+
+
+
+
+
+
+
+
+
+    <footer class="w100p h368 bgcffffff">
+        <div class="w100p h368 pt40 home_footer">
+            <div class="w218 h64 m0a ofh">
+                <img src="images/logo_icon.png" class="object-fit-cover fl" alt="logo">
+            </div>
+            <div class="tac fz30 mt30 mb30" style="color: #f08200;">
+                这里想放一句,类似平台的slogn
+            </div>
+            <div class="w670 h2 bgcf5f5f5 m0a op70"></div>
+
+            <div class="tac mt30">
+                <a href="tel:0000000" class="fz30 cffffff op60 lh30 mr30"><img src="images/icon_tel.png" class="w30 h30 mr10" alt="">联系我们</a>
+                <a href="###" class="fz30 cffffff op60 lh30"><img src="images/icon_aboutus.png" class="w30 h30 mr10" alt="">关于我们</a>
+            </div>
+            <div class="tac fz20 cffffff op50 mt10">
+                上海沐跑信息科技有限公司 <br/>
+                北京ICP备0000000号
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <a href="###" class="db w120 h254 pf b200 r40">
+        <img src="images/icon_dz_btn.png" class="object-fit-cover" alt="">
+    </a>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/change_font_size.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="js/swiper.min.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function() {
+            var swiper = new Swiper('.swiper-container',{
+                autoplay: true,
+                speed: 2000,
+                autoplayDisableOnInteraction: false,
+                loop: true,
+                centeredSlides: true,
+                slidesPerView: 3,
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                onInit: function(swiper) {
+                    swiper.slides[1].className = "swiper-slide swiper-slide-active";
+                },
+                breakpoints: {
+                    668: {
+                        slidesPerView: 1,
+                    }
+                }
+            });
+        }
+
+
+
+
+    </script>
+
+
+
+    <script type="text/javascript" src="js/zepto_min.js"></script>
+
+    <script type="text/javascript" src="js/touchslider.js"></script>
+
+    <script>
+
+
+    </script>
+
+</body>
+</html>
