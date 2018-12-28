@@ -10,6 +10,8 @@ function changeFontSize() {
     return font_size;
 }
 $(function(){
+    
+
     CARD_DATA.font_size = changeFontSize();
     realRemChange();
     $(window).resize(function() {

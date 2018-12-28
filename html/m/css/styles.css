@@ -3,7 +3,7 @@
 }
 
 /*头部*/
-.home_header{border-radius: 0 0 10px 10px;z-index: 999;}
+.home_header{border-radius: 0 0 10px 10px;z-index: 666;}
 .location_area{background-image: url("../images/arrow_down_s.png");background-repeat: no-repeat;background-position: center right;background-size: .21333rem;padding-right: .36rem;}
 .header_search{background-image: url("../images/icon_search.png");background-repeat: no-repeat;background-position: 5.86667rem center;background-size: .4rem;}
 .header_search input{outline: none;-webkit-appearance: none;border: 0;background-color: transparent;}
@@ -42,5 +42,10 @@
 
 
 i{font-style: normal!important;}
+
+
+/*侧滑样式*/
+.sildeMenu{z-index: 888}
+.sildeMenu .menu-active{background-color: #f3f3f3}
 
 
