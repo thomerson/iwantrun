@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录</title>
+
+    <link rel="stylesheet" href="css/mincss.css">
+    <link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-active{
+            font-size: .61333rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-top: -.24rem;
+        }
+        .login_label_btn{
+            display: inline-block;
+            width: 2.53333rem;
+            height: .64rem;
+            line-height: .54rem;
+            border: 1px solid #f6b03e;
+            color: #f6b03e;
+            font-size:.32rem;
+            float: left;
+        }
+        .login_label_btn_01{
+            border-radius: .32rem 0 0 .32rem;
+        }
+        .login_label_btn_02{
+            border-radius:0 .32rem .32rem 0;
+        }
+        .label_active{
+            background-color: #f6b03e;
+            color: #000;
+        }
+        .login_area_02 input,.login_area_01 input{
+            outline: none;
+            -webkit-appearance: none;
+            border: 0;
+            background-color: transparent;
+        }
+        .login_btn{
+            border-radius: 39px;
+            background-image: -moz-linear-gradient( 0deg, rgb(227,114,62) 0%, rgb(230,142,65) 40%, rgb(233,170,67) 100%);
+            background-image: -webkit-linear-gradient( 0deg, rgb(227,114,62) 0%, rgb(230,142,65) 40%, rgb(233,170,67) 100%);
+            background-image: -ms-linear-gradient( 0deg, rgb(227,114,62) 0%, rgb(230,142,65) 40%, rgb(233,170,67) 100%);
+        }
+
+
+    </style>
+</head>
+<body class="bgcffffff">
+
+    <header class="w100p h80 bgcffffff pf t0 l0">
+        <a class="fl ml30 mt20" href="javascript:;">
+            <img src="images/close_icon_a.png" class="w24 h24" alt="">
+        </a>
+    </header>
+    <nav class="mt100 w670 ml40 pt18 ofh">
+        <a class="c333333 fz30 fl ml30 mr30 ">登 录</a>
+        <a class="c333333 fz30 fl ml30 mr30 login-active">注 册</a>
+    </nav>
+    <!--登录-->
+    <section class="pr dn login_party">
+        <div class="w750 h640 pa t0 l0 zi-1"><img src="images/login_bg_01.png" class="object-fit-cover" alt=""></div>
+        <div class="tac pt100">
+            <div class="login_label w380 ofh m0a">
+                <a href="javascript:;" class="login_label_btn login_label_btn_01 label_active">已有登录账号</a>
+                <a href="javascript:;" class="login_label_btn login_label_btn_02 ">动态码登录</a>
+            </div>
+            <!--已有账号登录-->
+            <div class="login_area_01 pt40">
+                <div class="w596 h78 br10 bgcf5f5f5 m0a tac">
+                    <input type="text" class="w540 h60 lh60 mt8" placeholder="请输入手机号"/>
+                </div>
+                <div class="w596 m0a">
+                    <div class="w596 h78 br10 bgcf5f5f5 mt30 tac">
+                        <input type="password" class="w540 h60 lh60 mt8" placeholder="请输入密码"/>
+                    </div>
+                </div>
+                <div class="w596 m0a ofh">
+                    <a href="javascript:;" class="db w596 h78 lh78 tac cffffff fz36 login_btn fl mt76">登 录</a>
+                </div>
+                <div class="w596 m0a ofh">
+                    <a href="javascript:;" class="fz24 c333333 fr mt20">找回密码</a>
+                </div>
+            </div>
+            <!--动态码登录-->
+            <div class="login_area_02 pt40 dn">
+                <div class="w596 h78 br10 bgcf5f5f5 m0a tac">
+                    <input type="text" class="w540 h60 lh60 mt8" placeholder="请输入手机号"/>
+                </div>
+                <div class="w596 m0a ofh">
+                    <div class="w412 h78 br10 bgcf5f5f5 tac mt30 fl">
+                        <input type="text" class="w350 h60 lh60 mt8" placeholder="请输入手机号"/>
+                    </div>
+                    <div class="w184 h78 lh78 tac fl mt30" style="color: #f6b03e">发送验证码</div>
+                </div>
+                <div class="w596 m0a ofh">
+                    <a href="javascript:;" class="db w596 h78 lh78 tac cffffff fz36 login_btn fl mt76">登 录</a>
+                </div>
+                <div class="w596 m0a ofh">
+                    <a href="javascript:;" class="fz24 c333333 fr mt20">找回密码</a>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+    <!--注册-->
+    <section class="pr re_party">
+        <div class="w750 h690 pa t0 l0 zi-1"><img src="images/login_bg_02.png" class="object-fit-cover" alt=""></div>
+        <div class="tac pt40">
+            <div class="login_area_02 pt40">
+                <div class="w596 h78 br10 bgcf5f5f5 m0a tac">
+                    <input type="text" class="w540 h60 lh60 mt8" placeholder="请输入手机号"/>
+                </div>
+                <div class="w596 m0a ofh">
+                    <div class="w412 h78 br10 bgcf5f5f5 tac mt30 fl">
+                        <input type="text" class="w350 h60 lh60 mt8" placeholder="请输入手机号"/>
+                    </div>
+                    <div class="w184 h78 lh78 tac fl mt30" style="color: #f6b03e">发送验证码</div>
+                </div>
+                <div class="w596 m0a ofh">
+                    <div class="w596 h78 br10 bgcf5f5f5 mt30 tac">
+                        <input type="password" class="w540 h60 lh60 mt8" placeholder="请输入密码"/>
+                    </div>
+                </div>
+                <div class="w596 m0a ofh">
+                    <span class="c888888 fz22 mt20 fl">*8-20个字符：可由数字、字母、符号组成</span>
+                </div>
+                <div class="w596 m0a ofh">
+                    <a href="javascript:;" class="db w596 h78 lh78 tac cffffff fz36 login_btn fl mt76">注册并登录</a>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <section class="w550 h174 pa b40 l100">
+        <div class="tac fz24 c999999 ofh">
+            <div class="w210 fl bb1se5e5e5 pt16" ></div>
+            <div class="w130 fl">快速登录</div>
+            <div class="w210 fl bb1se5e5e5 pt16"></div>
+        </div>
+        <div class="tac mt30">
+            <a href="javascript:;" class="ml30 mr30">
+                <img src="images/icon_qq.png" class="w80 h80" alt="">
+            </a>
+            <a href="javascript:;" class="ml30 mr30">
+                <img src="images/icon_weixin.png" class="w80 h80" alt="">
+            </a>
+        </div>
+    </section>
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/change_font_size.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>
