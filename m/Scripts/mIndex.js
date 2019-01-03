@@ -49,6 +49,10 @@ var requestUrl = {
 //dev
 axios.post = axios.get;
 
+Vue.component('indexheader', {
+    template: '#indexheader'
+});
+
 var appIndex = new Vue(
 	{
 	    el: "#container",
@@ -60,7 +64,9 @@ var appIndex = new Vue(
 	                currentmenu: 'prodution'
 	            }
 	        },
-	       
+	        show: {
+	            personal: false
+	        },
 	        mask: false,
 	        loginId: '18018336171',
 	        loginBtnUl: true,
@@ -79,6 +85,14 @@ var appIndex = new Vue(
 	        var vm = this;
 	    },
 	    methods: {
+	        setCurrentPage: function (page) {
+	            var vm = this;
+	            vm.currentpage = page;
+	            window.scrollTo(0, 0);
+	        },
+	        showpersonal: function () {
+
+	        },
 	        getBanner: function () {
 	            var vm = this, url = "../" + requestUrl.castposition, param = {};
 	            axios.post(url, param).then(
@@ -139,14 +153,19 @@ var appIndex = new Vue(
 						})
 	        },
 	        showOrder: function () {
-	            window.location.href = '../m/ordersubmit.html';
+	            //window.location.href = '../m/ordersubmit.html';
+	            var vm = this;
+	            vm.currentpage = 'order';
 	        }
 	    },
 	    components: {
-	        companyfooter: '#companyfooter',
-	        helporder: '#helporder',
-	        indexheader: '#indexheader'
+	        companyfooter: { template: '#companyfooter' },
+	        helporder: { template: '#helporder' },
+	        //indexheader: { template: '#indexheader' }
 	    },
+	    //template: {
+	    //    helporder: '#helporder'
+	    //},
 	    created: function () {
 	        var vm = this;
 	        vm.getBanner();
