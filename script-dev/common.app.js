@@ -835,35 +835,3 @@ function checkUploadedFile(contentId){
 }
 
 
-//-------------------------------------------------------------------request url ---------------------------------------------	
-var requestUrl = {
-    //Release
-    //queryProdutionByCondition: 'production/queryProdutionByCondition',
-    //querylocationByCondition:'location/querylocationByCondition',
-    //queryCaseByCondition:'case/queryCaseByCondition',
-    //trade_status:'trade_status/query',
-    //webSiteCooperativeLogo:'webSiteCooperativeLogo/query',
-    //websiteNews:'websiteNews/query',
-    //castposition:'castposition/findAll',
-    //produtionSearchList:'production/produtionSearchList',
-    //locationSearchList:'location/locationSearchList',
-    //caseSearchList:'case/caseSearchList',
-
-    //DEV
-    queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
-    querylocationByCondition: 'Json/querylocationByCondition.json',
-    queryCaseByCondition: 'Json/queryCaseByCondition.json',
-    trade_status: 'Json/trade_status.json',
-    webSiteCooperativeLogo: 'Json/webSiteCooperativeLogo.json',
-    websiteNews: 'Json/websiteNews.json',
-    castposition: 'Json/castposition.json',
-    produtionSearchList: 'Json/produtionSearchList.json',
-    locationSearchList: 'Json/locationSearchList.json',
-    caseSearchList:'Json/caseSearchList.json'
-};
-
-//dev
-axios.post = axios.get;
-
-//DEV
-$http_form.post = $http_form.get;
