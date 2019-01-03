@@ -32,6 +32,10 @@ var requestUrl = {
     //produtionSearchList:'production/produtionSearchList',
     //locationSearchList:'location/locationSearchList',
     //caseSearchList:'case/caseSearchList',
+    //login: 'purchaserAccount/login',
+    //logout:'purchaserAccount/logout',
+    //findMixedByLoginId:'purchaserAccount/findMixedByLoginId',
+    //verify:'token/verify',
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -43,7 +47,11 @@ var requestUrl = {
     castposition: 'Json/castposition.json',
     produtionSearchList: 'Json/produtionSearchList.json',
     locationSearchList: 'Json/locationSearchList.json',
-    caseSearchList: 'Json/caseSearchList.json'
+    caseSearchList: 'Json/caseSearchList.json',
+    login: 'Json/login.json',
+    logout: 'Json/logout.json',
+    findMixedByLoginId: 'Json/findMixedByLoginId.json',
+    verify: 'Json/verify.json'
 };
 
 //dev
@@ -54,123 +62,126 @@ Vue.component('indexheader', {
 });
 
 var appIndex = new Vue(
-	{
-	    el: "#container",
-	    data: {
-	        currentpage: 'index',
-	        model: {
-	            index: {
-	                bannerList: [],
-	                currentmenu: 'prodution'
-	            }
-	        },
-	        show: {
-	            personal: false
-	        },
-	        mask: false,
-	        loginId: '18018336171',
-	        loginBtnUl: true,
-	        loginIdUl: false,
-	        productIndexList: [],
-	        locationIndexList: [],
-	        caseIndexList: [],
-	        news: [],
-	        newsIndex: 0,
-	        trades: [],
-	        tradeIndex: 0,
-	        partners: [],
-	        tailWeixinIcon: false
-	    },
-	    created: function () {
-	        var vm = this;
-	    },
-	    methods: {
-	        setCurrentPage: function (page) {
-	            var vm = this;
-	            vm.currentpage = page;
-	            window.scrollTo(0, 0);
-	        },
-	        showpersonal: function () {
+    {
+        el: "#container",
+        data: {
+            currentpage: 'index',
+            model: {
+                index: {
+                    bannerList: [],
+                    currentmenu: 'prodution',
+                    cases: []
+                },
+                order: {
+                    isshowall: false
+                }
+            },
+            show: {
+                sildeMenu: false
+            },
+            mask: false,
+            loginId: '18018336171',
+            loginBtnUl: true,
+            loginIdUl: false,
+            productIndexList: [],
+            locationIndexList: [],
+            caseIndexList: [],
+            news: [],
+            newsIndex: 0,
+            trades: [],
+            tradeIndex: 0,
+            partners: [],
+            tailWeixinIcon: false
+        },
+        created: function () {
+            var vm = this;
+        },
+        methods: {
+            setCurrentPage: function (page) {
+                var vm = this;
+                vm.currentpage = page;
+                vm.show.sildeMenu = false;
+                window.scrollTo(0, 0);
+            },
+            getBanner: function () {
+                var vm = this, url = "../" + requestUrl.castposition, param = {};
+                axios.post(url, param).then(
+                    function (response) {
+                        //console.log(response.data);
+                        var data = response.data;
+                        vm.model.index.bannerList = $.parseJSON(data.list);
+                    })
+            },
+            queryCaseByCondition: function (pageIndex) {
+                var vm = this, url = "../" + requestUrl.queryCaseByCondition, param = {};
+                param.pageIndex = pageIndex - 1;
+                axios.post(url, param).then(
+                    function (response) {
+                        console.log(response.data);
+                        vm.model.index.cases = response.data.content;
+                        //var list = response.data;
+                        //if (list != '') {
+                        //	vm.caseIndexList = list.content;
+                        //	if (vm.caseIndexList != '' && vm.caseIndexList.length > 0) {
+                        //		for (var i = 0; i < vm.caseIndexList.length; i++) {
+                        //			if (i == 0 || i == 5) {
+                        //				vm.caseIndexList[i].isBig = true;
+                        //			}
+                        //			if (i == 1 || i == 2 || i == 3 || i == 4) {
+                        //				vm.caseIndexList[i].isBig = false;
+                        //			}
 
-	        },
-	        getBanner: function () {
-	            var vm = this, url = "../" + requestUrl.castposition, param = {};
-	            axios.post(url, param).then(
-					function (response) {
-					    //console.log(response.data);
-					    var data = response.data;
-					    vm.model.index.bannerList = $.parseJSON(data.list);
-					})
-	        },
-	        queryCaseByCondition: function (pageIndex) {
-	            var vm = this, url = "../" + requestUrl.queryCaseByCondition, param = {};
-	            param.pageIndex = pageIndex - 1;
-	            axios.post(url, param).then(
-						function (response) {
-						    console.log(response.data);
-						    var list = response.data;
-						    //if (list != '') {
-						    //	vm.caseIndexList = list.content;
-						    //	if (vm.caseIndexList != '' && vm.caseIndexList.length > 0) {
-						    //		for (var i = 0; i < vm.caseIndexList.length; i++) {
-						    //			if (i == 0 || i == 5) {
-						    //				vm.caseIndexList[i].isBig = true;
-						    //			}
-						    //			if (i == 1 || i == 2 || i == 3 || i == 4) {
-						    //				vm.caseIndexList[i].isBig = false;
-						    //			}
+                        //		}
+                        //	}
+                        //}
 
-						    //		}
-						    //	}
-						    //}
+                    })
+            },
+            queryProdutionByCondition: function (pageIndex) {
+                var vm = this, url = "../" + requestUrl.queryProdutionByCondition, param = {};
+                param.pageIndex = pageIndex - 1;
+                axios.post(url, param).then(
+                    function (response) {
+                        console.log(response.data);
+                        var list = response.data;
+                        //if (list != '') {
+                        //	vm.productIndexList = list.content;
+                        //}
 
-						})
-	        },
-	        queryProdutionByCondition: function (pageIndex) {
-	            var vm = this, url = "../" + requestUrl.queryProdutionByCondition, param = {};
-	            param.pageIndex = pageIndex - 1;
-	            axios.post(url, param).then(
-						function (response) {
-						    console.log(response.data);
-						    var list = response.data;
-						    //if (list != '') {
-						    //	vm.productIndexList = list.content;
-						    //}
-
-						})
-	        },
-	        queryLocationByCondition: function (pageIndex) {
-	            var vm = this, url = "../" + requestUrl.querylocationByCondition, param = {};
-	            param.pageIndex = pageIndex - 1;
-	            axios.post(url, param).then(
-						function (response) {
-						    console.log(response.data);
-						    var list = response.data;
-						    //if (list != '') {
-						    //	vm.List = list.content;
-						    //	vm.locationIndexList = list.content;
-						    //}
-						})
-	        },
-	        showOrder: function () {
-	            //window.location.href = '../m/ordersubmit.html';
-	            var vm = this;
-	            vm.currentpage = 'order';
-	        }
-	    },
-	    components: {
-	        companyfooter: { template: '#companyfooter' },
-	        helporder: { template: '#helporder' },
-	        //indexheader: { template: '#indexheader' }
-	    },
-	    //template: {
-	    //    helporder: '#helporder'
-	    //},
-	    created: function () {
-	        var vm = this;
-	        vm.getBanner();
-	        vm.queryCaseByCondition(1);
-	        vm.queryProdutionByCondition(1);
-	        vm.queryLocationByCondition(1);
-	    }
-	});
+                    })
+            },
+            queryLocationByCondition: function (pageIndex) {
+                var vm = this, url = "../" + requestUrl.querylocationByCondition, param = {};
+                param.pageIndex = pageIndex - 1;
+                axios.post(url, param).then(
+                    function (response) {
+                        console.log(response.data);
+                        var list = response.data;
+                        //if (list != '') {
+                        //	vm.List = list.content;
+                        //	vm.locationIndexList = list.content;
+                        //}
+                    })
+            },
+            showOrder: function () {
+                //window.location.href = '../m/ordersubmit.html';
+                var vm = this;
+                vm.currentpage = 'order';
+            }
+        },
+        components: {
+            companyfooter: { template: '#companyfooter' },
+            helporder: { template: '#helporder' },
+            //indexheader: { template: '#indexheader' }
+        },
+        //template: {
+        //    helporder: '#helporder'
+        //},
+        created: function () {
+            var vm = this;
+            vm.getBanner();
+            vm.queryCaseByCondition(1);
+            vm.queryProdutionByCondition(1);
+            vm.queryLocationByCondition(1);
+        }
+    });

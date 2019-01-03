@@ -9,10 +9,15 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!--城市css-->
+    <!--<link href="css/mui.css" rel="stylesheet" />
+    <link href="css/mui.indexedlist.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/select_location.css" />-->
 </head>
 <body>
     <div id="container">
-       
+
 
         <!--首页-->
         <div v-show="currentpage=='index'">
@@ -22,7 +27,7 @@
                 <div class="w500 h56 bgcf5f5f5 br45 header_search pa t34 l150">
                     <input type="text" class="w456 h40 lh40 mt8 fl pl30 pr30 fz26" placeholder="产品、场地、案例" />
                 </div>
-                <a class="fr mr30 mt40" href="javascript:void(0)" @click="show.personal=true">
+                <a class="fr mr30 mt40" href="javascript:void(0)" @click="show.sildeMenu=true">
                     <img src="images/icon_menu_btn.png" class="w26 h26" alt="">
                 </a>
             </header>
@@ -44,14 +49,14 @@
 
             <!--pannel-->
             <ul class="run_menu page">
-                <li class="dib w140 h80 lh80 tac pr run_actives">
-                    <a href="#menu_01" class="db fz28 c333333">找方案 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
+                <li :class="model.index.currentmenu=='prodution'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='prodution'">
+                    <a href="javascript:void(0)" class="db fz28 c333333">找方案 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
-                <li class="dib w140 h80 lh80 tac pr">
-                    <a href="#menu_02" class="db fz28 c333333">看场地 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
+                <li :class="model.index.currentmenu=='location'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='location'">
+                    <a href="javascript:void(0)" class="db fz28 c333333">看场地 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
-                <li class="dib w140 h80 lh80 tac pr ">
-                    <a href="#menu_03" class="db fz28 c333333">看案例 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
+                <li :class="model.index.currentmenu=='case'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='case'">
+                    <a href="javascript:void(0)" class="db fz28 c333333">看案例 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
             </ul>
 
@@ -197,7 +202,8 @@
                     </ul>
                     <a href="###" class="db w670 h86 lh86 tac b1se5e5e5 br10 fz28 c666666 m0a">查看全部方案</a>
                 </section>
-                <section id="menu_02" class="li_list w100p bgcffffff mt-4 pb40 dn">
+                <!--场地-->
+                <section v-show="model.index.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 dn">
                     <ul class="pt40">
                         <li class="mb34">
                             <div class="w670 h392 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
@@ -418,38 +424,23 @@
 
                     <a href="###" class="db w670 h86 lh86 tac b1se5e5e5 br10 fz28 c666666 m0a">查看全部场地</a>
                 </section>
-                <section id="menu_03" class="li_list w100p bgcffffff mt-4 pb40">
+                <!--案例-->
+                <section v-show="model.index.currentmenu=='case'" class="li_list w100p bgcffffff mt-4 pb40">
                     <ul class="pt40">
-                        <li class="mb34">
+                        <li class="mb34" v-for="item in model.index.cases">
                             <div class="w670 h504 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
                                 <div class="w100p h328">
-                                    <img src="images/img21.png" class="object-fit-cover" alt="">
+                                    <img :src="item.descirbeText2" class="object-fit-cover" alt="">
                                 </div>
 
-                                <div class="fz32 fw700 pl30 pt20 w534 mult-line-ellipsis-1">中建一局 - 坝上草原户外行</div>
+                                <div class="fz32 fw700 pl30 pt20 w534 mult-line-ellipsis-1">{{item.name}}</div>
                                 <div class="pl30 pr30 pt20 fz24 c666666">
-                                    <p>浙江省·台州市</p>
-                                    <p>3-5天 / 50-100人</p>
+                                    <p>{{item.activityProvinceCode}}·{{item.activityCityCode}}</p>
+                                    <p>{{item.designDuringCo}} / {{item.groupNumber}}</p>
                                 </div>
 
                             </div>
                         </li>
-                        <li class="mb34">
-                            <div class="w670 h504 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
-                                <div class="w100p h328">
-                                    <img src="images/img22.png" class="object-fit-cover" alt="">
-                                </div>
-
-                                <div class="fz32 fw700 pl30 pt20 w534 mult-line-ellipsis-1">中欧国际校友会 - 穿越库布齐沙漠</div>
-                                <div class="pl30 pr30 pt20 fz24 c666666">
-                                    <p>浙江省·台州市</p>
-                                    <p>3-5天 / 50-100人</p>
-                                </div>
-
-                            </div>
-                        </li>
-
-
                     </ul>
                     <div class="w670 h2 bgcf5f5f5 m0a"></div>
                     <!--合作企业-->
@@ -569,12 +560,12 @@
             <a href="javascript:void(0)" class="db w120 h254 pf b200 r40" @click="setCurrentPage('order')">
                 <img src="images/icon_dz_btn.png" class="object-fit-cover" alt="">
             </a>
-         
+
         </div>
 
-        <!--个人中心-->
-        <div class="sildeMenu w100p h100p pf t0 r0" v-show="show.personal" >
-            <div class="w610 h100p bgcffffff fr pa t0 r0 zi2" >
+        <!--侧边栏菜单-->
+        <div class="sildeMenu w100p h100p pf t0 r0" v-show="show.sildeMenu">
+            <div class="w610 h100p bgcffffff fr pa t0 r0 zi2">
                 <div class="w174 h174  ml218 mt90 ofh pr">
                     <i class="pa r10 t0"><img src="images/vip_img.png" class="w28 h28" alt=""></i>
                     <img src="images/head_img.png" class="object-fit-cover br50p" alt="">
@@ -584,7 +575,7 @@
                 <div class="w406 h2 bgcf5f5f5 m0a"></div>
                 <ul>
                     <li class="tac lh100">
-                        <a href="###">
+                        <a href="javascript:void(0)" @click="setCurrentPage('myaccount')">
                             <img src="images/menu_icon_01.png" class="w36 h36" alt="">
                             <span class="fz30 c333333">个人中心</span>
                         </a>
@@ -610,7 +601,7 @@
 
                 </ul>
             </div>
-            <div class="sildeBg w100p h100p bgcffffff op60" @click="show.personal=false"></div>
+            <div class="sildeBg w100p h100p bgcffffff op60" @click="show.sildeMenu=false"></div>
         </div>
 
         <!--定制订单-->
@@ -623,7 +614,7 @@
                     <img src="images/icon_zx.png" class="w26 h24" alt="">
                     联系咨询师
                 </a>
-                <a class="fr mr30 mt40">
+                <a class="fr mr30 mt40" @click="show.sildeMenu=true">
                     <img src="images/icon_menu_btn.png" class="w26 h26" alt="">
                 </a>
             </header>
@@ -681,7 +672,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="more-info w596 m0a ofh">
+                    <div class="more-info w596 m0a ofh" v-show="model.order.isshowall">
                         <div class="w596 m0a">
                             <div class="pt40 pb20">活动人数</div>
                             <div class="w596 h78 br45 bgcf5f5f5 m0a tac">
@@ -705,9 +696,9 @@
                         </div>
                     </div>
                     <div class="w596 h2 bgcf5f5f5 ml40 mt40 mb30"></div>
-                    <a class="db tac arrowBtn">
-                        <span class="fz26" style="color: #f6b03e;">收起信息</span>
-                        <img src="images/arrow_down_y.png" class="w28 h16 rotate180" alt="">
+                    <a href="javascript:void(0)" class="db tac arrowBtn" @click="model.order.isshowall=!model.order.isshowall">
+                        <span class="fz26" style="color: #f6b03e;">{{model.order.isshowall?'收起信息':'更多信息'}}</span>
+                        <img src="images/arrow_down_y.png" :class="model.order.isshowall?'w28 h16 rotate0':'w28 h16 rotate180'" alt="" >
                     </a>
 
                 </div>
@@ -722,7 +713,160 @@
 
         </div>
 
-     
+        <!--城市-->
+        <div class="city" v-show="currentpage=='city'">
+            <div class="mui-content">
+                <div id='list' class="mui-indexed-list">
+                    <header class="mui-bar">
+                        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:history.back(-1)"></a>
+                        <div class="mui-indexed-list-search mui-input-row mui-search">
+                            <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="输入城市或拼音查询">
+                        </div>
+                    </header>
+
+                    <div class="mui-indexed-list-bar">
+                        <a>A</a>
+                        <a>B</a>
+                        <a>C</a>
+                        <a>D</a>
+                        <a>E</a>
+                        <a>F</a>
+                        <a>G</a>
+                        <a>H</a>
+                        <a>I</a>
+                        <a>J</a>
+                        <a>K</a>
+                        <a>L</a>
+                        <a>M</a>
+                        <a>N</a>
+                        <a>O</a>
+                        <a>P</a>
+                        <a>Q</a>
+                        <a>R</a>
+                        <a>S</a>
+                        <a>T</a>
+                        <a>U</a>
+                        <a>V</a>
+                        <a>W</a>
+                        <a>X</a>
+                        <a>Y</a>
+                        <a>Z</a>
+                    </div>
+                    <div class="mui-indexed-list-alert"></div>
+
+                    <div class="mui-indexed-list-inner">
+                        <div class="pl30 ofh pb40 pt80">
+                            <article class="positioning-btn pt40 pb40 fz24 lh24">
+                                <img class="w36 vat m0" src="images/location_icon_01.png">
+                                <span class="fz28 lh24 c666666 ml20">当前城市</span>
+                                <span class="location-city fz28 lh36 fw700 ml10">杭州市</span>
+
+                            </article>
+                            <article class="h1px bgce5e5e5"></article>
+                            <article>
+                                <p class="fz24 lh28 c666666 mt30">热门城市</p>
+                                <div class="clearfix">
+                                    <div class="hot-city-btn fl mr20 br10 tac w154 fz26 h64 lh64 mt30 location-active" style="border:1px solid #e5e5e5">上海</div>
+                                    <div class="hot-city-btn fl mr20 br10 tac w154 fz26 h64 lh64 mt30" style="border:1px solid #e5e5e5">乌鲁木齐</div>
+                                    <div class="hot-city-btn fl mr20 br10 tac w154 fz26 h64 lh64 mt30" style="border:1px solid #e5e5e5">杭州</div>
+                                    <div class="hot-city-btn fl mr20 br10 tac w154 fz26 h64 lh64 mt30" style="border:1px solid #e5e5e5">北京</div>
+                                    <div class="hot-city-btn fl mr20 br10 tac w154 fz26 h64 lh64 mt30" style="border:1px solid #e5e5e5">广州</div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="mui-clearfix"></div>
+                        <div class="mui-indexed-list-empty-alert">没有数据</div>
+                        <ul class="mui-table-view city-item"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--个人中心-->
+        <div v-show="currentpage=='myaccount'" class="bgcffffff">
+            <section>
+                <div class="w750 h258 pa t0 l0 zi-1"><img src="images/center_bg.png" class="object-fit-cover" alt=""></div>
+
+                <div class="mt108 tac" style="margin-bottom: -1.2rem">
+                    <img src="images/head_img.png" class="w174 h174 br50p" alt="">
+                </div>
+                <div class="w670 h460 bs-0-0-6-0-dddddd br10 m0a bgcffffff">
+                    <div class=" pt100 vam tac">
+                        <span class="dib fz34 mr10">用户0374865</span>
+                        <span class="dib ofh">
+                            <!--女-->
+                            <img src="images/sex_woman.png" class="w24 h24 fl" alt="">
+                            <!--男-->
+                            <!--<img src="images/sex_man.png" class="w24 h24" alt="">-->
+                        </span>
+                    </div>
+                    <div class="ml30 mr30 pt20 ofh">
+                        <div class="w300 tar fl">
+                            <span class="dib ofh mr4">
+                                <img src="images/location_icon_02.png" class="w18 h26 fl" alt="">
+                            </span>
+                            <span class="dib fz26 c888888 mr36">CN Beijing</span>
+                        </div>
+                        <div class="w10 fl mt10">
+                            <div class="w2 h22 bgcf5f5f5 m0a"></div>
+                        </div>
+                        <div class="w300 fl ">
+                            <span class="dib ofh mr4 ml36">
+                                <img src="images/certifi_icon.png" class="w24 h24 fl" alt="">
+                                <!--未认证图标-->
+                                <!--<img src="images/certifi_icon_n.png" class="w24 h24 fl" alt="">-->
+                            </span>
+                            <a href="###">
+                                <span class="dib fz26 c888888">企业信息：已认证</span>
+                                <!--<span class="dib fz26 c888888">企业信息：未认证</span>-->
+                                <span class="dib ofh">
+                                    <img src="images/arrow_right.png" class="w10 h24 fl" alt="">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info_edit_btn pt30 pb30">
+                        <a href="###" class="db w210 h50 lh46 br25 b1se5e5e5 fz28 tac c333333 m0a">编辑个人资料</a>
+                    </div>
+                    <div class="w610 ml30 h2 bgcf5f5f5"></div>
+                    <div class="w610 ml30 ofh pt30">
+                        <a href="javascript:;" class="db w200 fl tac">
+                            <p class="fz26 c888888">我的订单</p>
+                            <p class="fz48 c333333">12</p>
+                        </a>
+                        <a href="javascript:;" class="db w200 fl tac">
+                            <p class="fz26 c888888">待付款</p>
+                            <p class="fz48 c333333">0</p>
+                        </a>
+                        <a href="javascript:;" class="db w200 fl tac">
+                            <p class="fz26 c888888">关注收藏</p>
+                            <p class="fz48 c333333">34</p>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="w670 ml40">
+                    <a href="###" class="db bb1se5e5e5 pt30 pb30 pl10 pr10 fz30 c333333 ofh">
+                        <span class="fl">消息</span>
+                        <span class="fr db h28 lh28 cffffff fz20 br20 pl10 pr10 mt10" style="background-color: #fd5509;">0</span>
+                    </a>
+                    <a href="###" class="db bb1se5e5e5 pt30 pb30 pl10 pr10 fz30 c333333 ofh">
+                        <span class="fl">邮箱</span>
+                        <span class="fr c888888">2267364794@qq.com</span>
+                    </a>
+                    <a href="tel:18535139882" class="db bb1se5e5e5 pt30 pb30 pl10 pr10 fz30 c333333 ofh">
+                        <span class="fl">联系电话</span>
+                        <span class="fr c888888">18535139882</span>
+                    </a>
+                </div>
+
+                <div class="tac mt100">
+                    <a href="###" class="ccccccc fz30">退出登录</a>
+                </div>
+            </section>
+        </div>
+
         <!--template start-->
         <!--公司底部消息-->
         <script type="text/x-template" id="companyfooter">
@@ -754,7 +898,7 @@
 
     </div>
 
-    
+
 
     <script src="js/jquery.min.js"></script>
     <script src="js/change_font_size.js"></script>
@@ -765,7 +909,7 @@
 
     <script src="../script/vue.min.js"></script>
     <script src="../script/axios.min.js"></script>
-  
+
     <script src="../m/scripts/mindex.js"></script>
 </body>
 </html>
