@@ -631,9 +631,9 @@ body {
 
 @media screen and (max-width: 668px) {
 	.swiper-slide {
-		-webkit-transform: scale(0.8);
-		transform: scale(0.8);
-        opacity: .6;
+		-webkit-transform: scale(0.95);
+		transform: scale(0.95);
+        opacity: 1;
 	}
 }
 
