@@ -35,8 +35,8 @@
             <!--首页轮播图-->
             <section class="w100p mt140 ofh">
                 <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div v-for="(item,index) in model.index.bannerList" :class="index>0?'swiper-slide swiper-slide-center none-effect':'swiper-slide'">
+                    <div class="swiper-wrapper ">
+                        <div v-for="(item,index) in model.index.bannerList" :class="index>0?'swiper-slide w100p h100p swiper-slide-center none-effect':'swiper-slide'">
                             <a href="javascript:void(0)">
                                 <img :src="item.filePath">
                             </a>
@@ -924,6 +924,6 @@
     <script src="../script/vue.min.js"></script>
     <script src="../script/axios.min.js"></script>
 
-    <script src="../m/scripts/mindex.js"></script>
+    <script src="../m/Scripts/mIndex.js"></script>
 </body>
 </html>
