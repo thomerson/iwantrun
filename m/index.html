@@ -63,7 +63,7 @@
             <!--list-->
             <div>
                 <!--方案-->
-                <section v-show="model.index.currentmenu=='prodution'" class="li_list w100p bgcffffff mt-4 pb40 dn">
+                <section v-show="model.index.currentmenu=='prodution'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
                         <li class="h550 pr">
                             <div class="w48 h92 pa t-10 r80">
@@ -203,7 +203,7 @@
                     <a href="###" class="db w670 h86 lh86 tac b1se5e5e5 br10 fz28 c666666 m0a">查看全部方案</a>
                 </section>
                 <!--场地-->
-                <section v-show="model.index.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 dn">
+                <section v-show="model.index.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
                         <li class="mb34">
                             <div class="w670 h392 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
@@ -566,12 +566,26 @@
         <!--侧边栏菜单-->
         <div class="sildeMenu w100p h100p pf t0 r0" v-show="show.sildeMenu">
             <div class="w610 h100p bgcffffff fr pa t0 r0 zi2">
-                <div class="w174 h174  ml218 mt90 ofh pr">
-                    <i class="pa r10 t0"><img src="images/vip_img.png" class="w28 h28" alt=""></i>
-                    <img src="images/head_img.png" class="object-fit-cover br50p" alt="">
+                <div class="">
+                    <div class="w174 h174  ml218 mt90 ofh pr">
+                        <i class="pa r10 t0"><img src="images/vip_img.png" class="w28 h28" alt=""></i>
+                        <img src="images/head_img.png" class="object-fit-cover br50p" alt="">
+                    </div>
+                    <div class="fz38 tac mt20">185****2201</div>
+                    <div class="fz26 ccccccc tac mt10 mb20">已认证企业用户</div>
                 </div>
-                <div class="fz38 tac mt20">185****2201</div>
-                <div class="fz26 ccccccc tac mt10 mb20">已认证企业用户</div>
+
+
+                <!--点击登录-->
+                <!--<div class="">-->
+                    <!--<div class="w174 h174  ml218 mt90 ofh pr">-->
+                        <!--<img src="images/head_img_grey.png" class="object-fit-cover br50p" alt="">-->
+                    <!--</div>-->
+                    <!--<div class="fz34 tac mt20 mb20">点击登录</div>-->
+                <!--</div>-->
+
+
+
                 <div class="w406 h2 bgcf5f5f5 m0a"></div>
                 <ul>
                     <li class="tac lh100">
@@ -698,7 +712,7 @@
                     <div class="w596 h2 bgcf5f5f5 ml40 mt40 mb30"></div>
                     <a href="javascript:void(0)" class="db tac arrowBtn" @click="model.order.isshowall=!model.order.isshowall">
                         <span class="fz26" style="color: #f6b03e;">{{model.order.isshowall?'收起信息':'更多信息'}}</span>
-                        <img src="images/arrow_down_y.png" :class="model.order.isshowall?'w28 h16 rotate0':'w28 h16 rotate180'" alt="" >
+                        <img src="images/arrow_down_y.png" :class="model.order.isshowall?'w28 h16 rotate180':'w28 h16 rotate0'" alt="" >
                     </a>
 
                 </div>
