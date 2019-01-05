@@ -1,3 +1,50 @@
+var validate = {
+    isMobile: function (mobile) {
+        if (!mobile) {
+            return '请输入手机号';
+        }
+        var regex = new RegExp('[1][3578]\\d{9}', 'gim');
+        var is = regex.test(mobile);
+        if (!is) {
+            return '手机号无效，请重新输入';
+        }
+        return null;
+    },
+    Pwd: function (password) {
+        if (!password) {
+            return "请输入密码";
+        }
+
+        var length = password.length;
+        if (length < 8 || length > 16) {
+            return "密码长度必须大于等于8位，小于等于16位";
+        }
+
+        //	var regex = new RegExp('(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}', 'g');
+        //	var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[!@#$%^&*]+)|([a-zA-Z]+.*[!@#$%^&*]+.*[0-9]+)|([0-9]+.*[!@#$%^&*]+.*[a-zA-Z]+)|([0-9]+.*[a-zA-Z]+.*[!@#$%^&*]+)|([!@#$%^&*]+.*[a-zA-Z]+.*[0-9]+)|([!@#$%^&*]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
+        var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
+            '|([a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+)' +
+            '|([0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+)' +
+            '|([0-9]+.*[a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
+            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+.*[0-9]+)' +
+            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
+        var correct = regex.test(password);
+        if (!correct) {
+            return '密码格式不正确，请重新输入';
+        }
+    },
+    SMScode: function (smsCode) {
+        if (!smsCode) {
+            return '请输入短信验证码';
+        }
+        var regex = new RegExp('\\d{6}', 'g');
+        var correct = regex.test(smsCode);
+        if (!correct) {
+            return '短信验证码格式不正确，请重新输入';
+        }
+    }
+};
+
 window.onload = function () {
     var swiper = new Swiper('.swiper-container', {
         autoplay: true,
@@ -36,6 +83,7 @@ var requestUrl = {
     //logout:'purchaserAccount/logout',
     //findMixedByLoginId:'purchaserAccount/findMixedByLoginId',
     //verify:'token/verify',
+    //getSMSCode:'smsCode/getSMSCode'
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -51,7 +99,8 @@ var requestUrl = {
     login: 'Json/login.json',
     logout: 'Json/logout.json',
     findMixedByLoginId: 'Json/findMixedByLoginId.json',
-    verify: 'Json/verify.json'
+    verify: 'Json/verify.json',
+    getSMSCode: 'Json/getSMSCode.json'
 };
 
 //dev
@@ -65,7 +114,7 @@ var appIndex = new Vue(
     {
         el: "#container",
         data: {
-            currentpage: 'index',
+            currentpage: 'login',
             model: {
                 index: {
                     bannerList: [],
@@ -78,14 +127,17 @@ var appIndex = new Vue(
                     isshowall: false
                 },
                 login: {
-                    isshowregister: false
+                    isshowregister: false,
+                    isbymess: false, //动态码登录，
+                    smsCode: '',//短信验证码
+
                 }
             },
             show: {
                 sildeMenu: false
             },
             mask: false,
-            loginId: '18018336171',
+            loginId: '17521230795',
             accessToken: null,
             loginBtnUl: true,
             loginIdUl: false,
@@ -145,6 +197,18 @@ var appIndex = new Vue(
             switchLogin: function (isshowregister) {
                 var vm = this;
                 vm.model.login.isshowregister = !!isshowregister;
+            },
+            switchLogintype: function (isbymess) {
+                var vm = this;
+                vm.model.login.isbymess = !!isbymess;
+            },
+            sendVerifyCode: function () {
+                var vm = this, url = "../" + requestUrl.getSMSCode, param = {
+                    'mobile': vm.loginId
+                };
+                axios.post(url, param).then(function (response) {
+                    console.log(response.data);
+                });
             }
         },
         components: {
