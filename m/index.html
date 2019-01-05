@@ -530,8 +530,8 @@
             </nav>
             <!--登录-->
             <section class="pr login_party" v-show="!model.login.isshowregister">
-                <div class="w750 h640 pa t0 l0 zi-1"><img src="images/login_bg_01.png" class="object-fit-cover" alt=""></div>
-                <div class="tac pt100">
+                <div class="w750 h640 pa t0 l0 zi1"><img src="images/login_bg_01.png" class="object-fit-cover" alt=""></div>
+                <div class="tac pt100 pr zi2">
                     <div class="login_label w380 ofh m0a">
                         <a href="javascript:void(0)" :class="model.login.isbymess?'login_label_btn login_label_btn_01':'login_label_btn login_label_btn_01 label_active'" @click="switchLogintype(false)">已有登录账号</a>
                         <a href="javascript:void(0)" :class="model.login.isbymess?'login_label_btn login_label_btn_02 label_active':'login_label_btn login_label_btn_02 '" @click="switchLogintype(true)">动态码登录</a>
@@ -580,8 +580,8 @@
             </section>
             <!--注册-->
             <section class="pr re_party" v-show="model.login.isshowregister">
-                <div class="w750 h690 pa t0 l0 zi-1"><img src="images/login_bg_02.png" class="object-fit-cover" alt=""></div>
-                <div class="tac pt40">
+                <div class="w750 h690 pa t0 l0 zi1"><img src="images/login_bg_02.png" class="object-fit-cover" alt=""></div>
+                <div class="tac pt40 pr zi2">
                     <div class="login_area_02 pt40">
                         <div class="w596 h78 br10 bgcf5f5f5 m0a tac">
                             <input type="text" class="w540 h60 lh60 mt8" v-model="loginId" placeholder="请输入手机号" />
