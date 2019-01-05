@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <!--城市css-->
-    <!--<link href="css/mui.css" rel="stylesheet" />
-    <link href="css/mui.indexedlist.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/select_location.css" />-->
 </head>
 <body>
     <div id="container">
@@ -65,6 +61,7 @@
                 <!--方案-->
                 <section v-show="model.index.currentmenu=='prodution'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
+<<<<<<< HEAD
                         <li class="pr pb200">
                             <div class="w48 h92 pa t-10 r80">
                                 <img src="images/label_new.png" class="object-fit-cover" alt="">
@@ -90,34 +87,28 @@
                             <i class="w36 h36 lh36 tac fz22 db br50p cffffff pa r72 b260" style="background-color: #282b33;">2</i>
                         </li>
                         <li class="h550 pr">
+=======
+                        <li class="h550 pr" v-for="item in model.index.productions">
+>>>>>>> 0ff17fd2075e8d5fe271e17cf391e334df30390a
                             <div class="w48 h92 pa t-10 r80">
                                 <img src="images/label_new.png" class="object-fit-cover" alt="">
                             </div>
                             <div class="w670 h366 bgcffffff bs-0-0-6-0-dddddd br10 m0a">
-                                <div class="fz32 fw700 pl30 pt30 w534 mult-line-ellipsis-1">啤酒轰趴看球赛</div>
+                                <div class="fz32 fw700 pl30 pt30 w534 mult-line-ellipsis-1">{{item.name}}</div>
                                 <div class="pl30 pr30 pt30 fz18">
-                                    <span class="dib pl14 pr14 pt10 pb10 cffffff br6 mr20" style="background-color: #282b33;">关键字1</span>
-                                    <span class="dib pl14 pr14 pt10 pb10 cffffff br6 mr20" style="background-color: #282b33;">关键字2</span>
+                                    <span v-for="str in item.tips" class="dib pl14 pr14 pt10 pb10 cffffff br6 mr20" style="background-color: #282b33;">{{str}}</span>
                                 </div>
                                 <div class="pl30 pr30 pt30 fz24">
-                                    <p>浙江省·台州市</p>
-                                    <p>3-5天 / 50-100人</p>
+                                    <p>{{item.activityProvinceCode}}·{{item.activityCityCode}}</p>
+                                    <p>{{item.dur}} / {{item.groupNumber}}</p>
                                 </div>
                             </div>
                             <div class="w570 h240 pa b40 l90">
-                                <img src="images/img_02.png" class="object-fit-cover" alt="">
+                                <img :src="item.mainImageLarge" class="object-fit-cover" alt="">
                             </div>
-                            <i class="w36 h36 lh36 tac fz22 db br50p cffffff pa r72 b260" style="background-color: #282b33;">2</i>
                         </li>
                     </ul>
                     <div class="w670 h2 bgcf5f5f5 m0a"></div>
-                    <div class="w670 m0a pt30 ofh">
-                        <div class="fl lh50">
-                            <p class="fz34 fw700">热门案例</p>
-                            <p class="fz28 caaaaaa">所有有趣的，都在这里发生～</p>
-                        </div>
-                        <a href="###" class="arrow-icon fz26 caaaaaa lh50 fr">全部</a>
-                    </div>
                     <ul class="pt40">
                         <li class="h550 pr">
                             <div class="w670 h366 bgcffffff bs-0-0-6-0-dddddd br10 m0a">
@@ -155,6 +146,7 @@
                         </li>
                     </ul>
                     <div class="w670 h2 bgcf5f5f5 m0a"></div>
+                    <!--精选方案-->
                     <div class="w670 m0a pt30 ofh">
                         <div class="fl lh50">
                             <p class="fz34 fw700">精选方案</p>
@@ -209,7 +201,7 @@
                 <!--场地-->
                 <section v-show="model.index.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
-                        <li class="mb34">
+                        <li class="mb34" v-for="item in model.index.locations">
                             <div class="w670 h392 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
                                 <div class="ofh">
                                     <div class="w254 h254 br20 ml22 mt22 fl pr">

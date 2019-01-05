@@ -70,7 +70,9 @@ var appIndex = new Vue(
                 index: {
                     bannerList: [],
                     currentmenu: 'prodution',
-                    cases: []
+                    cases: [],
+                    productions: [],
+                    locations:[]
                 },
                 order: {
                     isshowall: false
@@ -117,24 +119,8 @@ var appIndex = new Vue(
                 param.pageIndex = pageIndex - 1;
                 axios.post(url, param).then(
                     function (response) {
-                        console.log(response.data);
+                        //console.log(response.data);
                         vm.model.index.cases = response.data.content;
-                        //var list = response.data;
-                        //if (list != '') {
-                        //	vm.caseIndexList = list.content;
-                        //	if (vm.caseIndexList != '' && vm.caseIndexList.length > 0) {
-                        //		for (var i = 0; i < vm.caseIndexList.length; i++) {
-                        //			if (i == 0 || i == 5) {
-                        //				vm.caseIndexList[i].isBig = true;
-                        //			}
-                        //			if (i == 1 || i == 2 || i == 3 || i == 4) {
-                        //				vm.caseIndexList[i].isBig = false;
-                        //			}
-
-                        //		}
-                        //	}
-                        //}
-
                     })
             },
             queryProdutionByCondition: function (pageIndex) {
@@ -143,11 +129,7 @@ var appIndex = new Vue(
                 axios.post(url, param).then(
                     function (response) {
                         console.log(response.data);
-                        var list = response.data;
-                        //if (list != '') {
-                        //	vm.productIndexList = list.content;
-                        //}
-
+                        vm.model.index.productions = response.data.content;
                     })
             },
             queryLocationByCondition: function (pageIndex) {
