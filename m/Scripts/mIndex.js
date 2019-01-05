@@ -128,7 +128,7 @@ var appIndex = new Vue(
                 param.pageIndex = pageIndex - 1;
                 axios.post(url, param).then(
                     function (response) {
-                        console.log(response.data);
+                        //console.log(response.data);
                         vm.model.index.productions = response.data.content;
                     })
             },
@@ -137,12 +137,8 @@ var appIndex = new Vue(
                 param.pageIndex = pageIndex - 1;
                 axios.post(url, param).then(
                     function (response) {
-                        console.log(response.data);
-                        var list = response.data;
-                        //if (list != '') {
-                        //	vm.List = list.content;
-                        //	vm.locationIndexList = list.content;
-                        //}
+                        vm.model.index.locations = response.data.content;
+                        console.log(vm.model.index.locations);
                     })
             },
             showOrder: function () {
