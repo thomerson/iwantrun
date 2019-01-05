@@ -72,10 +72,13 @@ var appIndex = new Vue(
                     currentmenu: 'prodution',
                     cases: [],
                     productions: [],
-                    locations:[]
+                    locations: []
                 },
                 order: {
                     isshowall: false
+                },
+                login: {
+                    isshowregister: false
                 }
             },
             show: {
@@ -83,6 +86,7 @@ var appIndex = new Vue(
             },
             mask: false,
             loginId: '18018336171',
+            accessToken: null,
             loginBtnUl: true,
             loginIdUl: false,
             productIndexList: [],
@@ -94,9 +98,6 @@ var appIndex = new Vue(
             tradeIndex: 0,
             partners: [],
             tailWeixinIcon: false
-        },
-        created: function () {
-            var vm = this;
         },
         methods: {
             setCurrentPage: function (page) {
@@ -137,14 +138,13 @@ var appIndex = new Vue(
                 param.pageIndex = pageIndex - 1;
                 axios.post(url, param).then(
                     function (response) {
+                        //console.log(response.data.content);
                         vm.model.index.locations = response.data.content;
-                        console.log(vm.model.index.locations);
                     })
             },
-            showOrder: function () {
-                //window.location.href = '../m/ordersubmit.html';
+            switchLogin: function (isshowregister) {
                 var vm = this;
-                vm.currentpage = 'order';
+                vm.model.login.isshowregister = !!isshowregister;
             }
         },
         components: {
