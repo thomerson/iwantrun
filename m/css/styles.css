@@ -225,3 +225,7 @@ i {
 .search .header_search {
     background-position: 8rem center;
 }
+
+.icon-checkbox-blank {
+    background-color: moccasin;
+}
