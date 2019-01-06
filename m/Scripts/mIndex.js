@@ -1,23 +1,23 @@
-var validate = {
+ï»¿var validate = {
     isMobile: function (mobile) {
         if (!mobile) {
-            return 'ÇëÊäÈëÊÖ»úºÅ';
+            return 'è¯·è¾“å…¥æ‰‹æœºå·';
         }
         var regex = new RegExp('[1][3578]\\d{9}', 'gim');
         var is = regex.test(mobile);
         if (!is) {
-            return 'ÊÖ»úºÅÎŞĞ§£¬ÇëÖØĞÂÊäÈë';
+            return 'æ‰‹æœºå·æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥';
         }
         return null;
     },
-    Pwd: function (password) {
+    validatePwd: function (password) {
         if (!password) {
-            return "ÇëÊäÈëÃÜÂë";
+            return "è¯·è¾“å…¥å¯†ç ";
         }
 
         var length = password.length;
         if (length < 8 || length > 16) {
-            return "ÃÜÂë³¤¶È±ØĞë´óÓÚµÈÓÚ8Î»£¬Ğ¡ÓÚµÈÓÚ16Î»";
+            return "å¯†ç é•¿åº¦å¿…é¡»å¤§äºç­‰äº8ä½ï¼Œå°äºç­‰äº16ä½";
         }
 
         //	var regex = new RegExp('(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}', 'g');
@@ -30,17 +30,17 @@ var validate = {
             '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
         var correct = regex.test(password);
         if (!correct) {
-            return 'ÃÜÂë¸ñÊ½²»ÕıÈ·£¬ÇëÖØĞÂÊäÈë';
+            return 'å¯†ç æ ¼å¼ä¸æ­£ç¡®ï¼Œè¯·é‡æ–°è¾“å…¥';
         }
     },
-    SMScode: function (smsCode) {
+    validateSMScode: function (smsCode) {
         if (!smsCode) {
-            return 'ÇëÊäÈë¶ÌĞÅÑéÖ¤Âë';
+            return 'è¯·è¾“å…¥çŸ­ä¿¡éªŒè¯ç ';
         }
         var regex = new RegExp('\\d{6}', 'g');
         var correct = regex.test(smsCode);
         if (!correct) {
-            return '¶ÌĞÅÑéÖ¤Âë¸ñÊ½²»ÕıÈ·£¬ÇëÖØĞÂÊäÈë';
+            return 'çŸ­ä¿¡éªŒè¯ç æ ¼å¼ä¸æ­£ç¡®ï¼Œè¯·é‡æ–°è¾“å…¥';
         }
     }
 };
@@ -80,6 +80,7 @@ var requestUrl = {
     //locationSearchList:'location/locationSearchList',
     //caseSearchList:'case/caseSearchList',
     //login: 'purchaserAccount/login',
+    //register: 'purchaserAccount/register',
     //logout:'purchaserAccount/logout',
     //findMixedByLoginId:'purchaserAccount/findMixedByLoginId',
     //verify:'token/verify',
@@ -97,6 +98,7 @@ var requestUrl = {
     locationSearchList: 'Json/locationSearchList.json',
     caseSearchList: 'Json/caseSearchList.json',
     login: 'Json/login.json',
+    register: 'Json/register.json',
     logout: 'Json/logout.json',
     findMixedByLoginId: 'Json/findMixedByLoginId.json',
     verify: 'Json/verify.json',
@@ -114,7 +116,11 @@ var appIndex = new Vue(
     {
         el: "#container",
         data: {
-            currentpage: 'login',
+            currentpage: 'index',
+            //loginId: '17521230795',
+            loginId: jQuery.cookie('loginId'),
+            //accessToken: null,
+            accessToken: jQuery.cookie('accessToken'),
             model: {
                 index: {
                     bannerList: [],
@@ -128,17 +134,39 @@ var appIndex = new Vue(
                 },
                 login: {
                     isshowregister: false,
-                    isbymess: false, //¶¯Ì¬ÂëµÇÂ¼£¬
-                    smsCode: '',//¶ÌĞÅÑéÖ¤Âë
-
+                    isbymess: false, //åŠ¨æ€ç ç™»å½•ï¼Œ
+                    smsCode: '',//çŸ­ä¿¡éªŒè¯ç 
+                    errMsg: null,
+                    autoLogin: false,
+                    password: null
                 }
             },
             show: {
-                sildeMenu: false
+                sildeMenu: false,
+                search: false
             },
+            SMS: {
+                timer: null,
+                disabled: false,
+                count: 0,
+                btnText: 'å‘é€éªŒè¯ç '
+            },
+            account: {
+                headimg: 'images/head_img.png',
+                nickname: jQuery.cookie('loginId'),
+                phone: jQuery.cookie('loginId'),
+                company: {
+                    name: 'ä¸Šæµ·æ²è·‘ç§‘æŠ€æœ‰é™å…¬å¸',
+                    licenses: [],
+                    hasCredential: false,
+                    companyTypeId: 0,
+                    companySizeId: 10,
+                    type: 'äº’è”ç½‘è½¯ä»¶',
+                    personNum: 200
+                }
+            },
+            currentcity: 'ä¸Šæµ·',//å½“å‰å®šä½åŸå¸‚
             mask: false,
-            loginId: '17521230795',
-            accessToken: null,
             loginBtnUl: true,
             loginIdUl: false,
             productIndexList: [],
@@ -152,11 +180,21 @@ var appIndex = new Vue(
             tailWeixinIcon: false
         },
         methods: {
-            setCurrentPage: function (page) {
+            setCurrentPage: function (page, login) {
                 var vm = this;
+                if (login && (!vm.loginId || !vm.accessToken)) {
+                    page = 'login'; //å…ˆç™»å½•
+                }
                 vm.currentpage = page;
                 vm.show.sildeMenu = false;
                 window.scrollTo(0, 0);
+            },
+            setCurrencity: function () {
+                var vm = this, city = jQuery.cookie('currentcity');
+                if (!city) {
+                    //è·å–å½“å‰ä½ç½®ä¿¡æ¯
+                }
+                vm.currentcity = city;
             },
             getBanner: function () {
                 var vm = this, url = "../" + requestUrl.castposition, param = {};
@@ -203,24 +241,219 @@ var appIndex = new Vue(
                 vm.model.login.isbymess = !!isbymess;
             },
             sendVerifyCode: function () {
-                var vm = this, url = "../" + requestUrl.getSMSCode, param = {
+                var TIME_COUNT = 60, vm = this, url = "../" + requestUrl.getSMSCode, param = {
                     'mobile': vm.loginId
                 };
+                if (!vm.SMS.timer) {
+                    vm.SMS.count = TIME_COUNT;
+                    vm.SMS.disabled = true;
+                    vm.SMS.timer = setInterval(() => {
+                        if (vm.SMS.count > 0 && vm.SMS.count <= TIME_COUNT) {
+                            console.log(vm.SMS.count);
+                            vm.SMS.btnText = vm.SMS.count + 'såé‡å‘';
+                            vm.SMS.count--;
+                        } else {
+                            vm.SMS.disabled = false;
+                            clearInterval(vm.SMS.timer);
+                            vm.SMS.timer = null;
+                            vm.SMS.btnText = 'å‘é€éªŒè¯ç ';
+                            vm.model.login.errMsg = null;
+                        }
+                    }, 1000);
+                }
+
+
+                axios.post(url, param).then(function (response) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    var encryptedSMSCode = $.cookie('encryptedSMSCode');
+                    if (data) {
+                        var returnstatus = data.returnstatus;
+                        var message = data.message;
+
+                        if (returnstatus == 'Success') {
+                            vm.model.login.errMsg = 'çŸ­ä¿¡å·²å‘é€';
+                        } else if (returnstatus == 'Faild') {
+                            console.log(message);
+                            vm.model.login.errMsg = 'çŸ­ä¿¡è·å–å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜';
+                        } else {
+                            if (message) {
+                                vm.model.login.errMsg = message;
+                            } else {
+                                vm.model.login.errMsg = 'çŸ­ä¿¡è·å–å¤±è´¥ï¼Œè¯·é‡æ–°è·å–';
+                            }
+                        }
+                    } else {
+                        vm.model.login.errMsg = 'çŸ­ä¿¡è·å–å¤±è´¥ï¼Œè¯·é‡æ–°è·å–';
+                    }
+                });
+            },
+            login: function () {
+                var vm = this, url = "../" + requestUrl.login, param = {
+                    smsCode: vm.model.login.smsCode,
+                    messageLogin: vm.model.login.isbymess,
+                    autoLogin: vm.model.login.autoLogin,
+                    account: {
+                        loginId: vm.loginId,
+                        smsCode: vm.model.login.smsCode,
+                        password: vm.model.login.password,
+                        mobileNumber: vm.loginId
+                    }
+                };
+
+                vm.model.login.errMsg = null;
+                // å…ˆæ ¡éªŒæ‰‹æœºå·
+                vm.model.login.errMsg = validate.isMobile(vm.loginId);
+                if (vm.model.login.errMsg) {
+                    return false;
+                }
+
+
+                if (vm.login.isbymess) {
+                    //éªŒè¯ç 
+                    vm.model.login.errMsg = validate.validateSMScode(vm.model.login.smsCode);
+                } else {
+                    //å¯†ç 
+                    vm.model.login.errMsg = validate.validatePwd(vm.model.login.password);
+                }
+                if (vm.model.login.errMsg) {
+                    return false;
+                }
+
                 axios.post(url, param).then(function (response) {
                     console.log(response.data);
+                    var data = response.data;
+                    var messageBody = data.messageBody;
+                    if (messageBody) {
+                        var message = JSON.parse(messageBody);
+                        vm.model.login.errMsg = message.errorMsg;
+                        if (vm.model.login.errMsg) {
+                            return;
+                        }
+                    }
+                    vm.accessToken = data.accessToken;
+                    jQuery.cookie('loginId', vm.loginId);
+                    jQuery.cookie('accessToken', vm.accessToken);
+                    vm.currentpage = 'index';
                 });
-            }
+            },
+            logout: function () {
+                var vm = this;
+                jQuery.cookie('loginId', '');
+                jQuery.cookie('accessToken', '');
+                vm.loginId = '';
+                vm.accessToken = '';
+                vm.setCurrentPage('index');
+            },
+            register: function () {
+                var vm = this, url = "../" + requestUrl.register, param = {
+                    smsCode: vm.model.login.smsCode,
+                    account: {
+                        loginId: vm.loginId,
+                        smsCode: vm.model.login.smsCode,
+                        password: vm.model.login.password,
+                        rePassword: vm.model.login.password,
+                        mobileNumber: vm.loginId
+                    }
+                };
+
+                vm.model.login.errMsg = null;
+                // å…ˆæ ¡éªŒæ‰‹æœºå·
+                vm.model.login.errMsg = validate.isMobile(vm.loginId);
+                if (vm.model.login.errMsg) {
+                    return false;
+                }
+
+
+                //éªŒè¯ç 
+                vm.model.login.errMsg = validate.validateSMScode(vm.model.login.smsCode);
+                if (vm.model.login.errMsg) {
+                    return false;
+                }
+                //å¯†ç 
+                vm.model.login.errMsg = validate.validatePwd(vm.model.login.password);
+
+                if (vm.model.login.errMsg) {
+                    return false;
+                }
+
+                axios.post(url, param).then(function (response) {
+                    console.log(response.data);
+                    var data = response.data;
+                    var messageBody = data.messageBody;
+                    if (messageBody) {
+                        var message = JSON.parse(messageBody);
+                        vm.model.login.errMsg = message.errorMsg;
+                        if (vm.model.login.errMsg) {
+                            return;
+                        }
+                    }
+                    vm.accessToken = data.accessToken;
+                    jQuery.cookie('loginId', vm.loginId);
+                    jQuery.cookie('accessToken', vm.accessToken);
+                    vm.currentpage = 'index';
+                });
+            },
+            getuser: function () {
+                var vm = this, url = "../" + requestUrl.findMixedByLoginId, param = {};
+                axios.post(url, param).then(
+                    function (response) {
+                        console.log(response.data);
+                        var data = response.data;
+                        if (data) {
+                            var errMsg = data.errMsg;
+                            if (errMsg) {
+                                vm.setCurrentPage('login');
+                            }
+                            var info = data.userInfo;
+                            var headImgs = data.headImgs;
+                            var companyCredentials = data.companyCredentials;
+                            var loginInfo = data.loginInfo;
+                            if (info) {
+                                if (headImgs && headImgs.length > 0) {
+                                    vm.account.headimg = headImgs[0].filePath;
+                                }
+                                vm.account.nickname = info.name;
+                                if (loginInfo) {
+                                    vm.account.phone = loginInfo.mobileNumber;
+                                }
+                                vm.account.securityanswer.question = info.question;
+                                vm.account.securityanswer.answer = info.answer;
+                                vm.account.company.name = info.companyName;
+                                if (companyCredentials) {
+                                    for (var i = 0; i < companyCredentials.length; i++) {
+                                        vm.account.company.licenses.push(companyCredentials[i].filePath);
+                                    }
+                                    vm.account.company.hasCredential = true;
+                                    //vm.nextCompanyCredential();
+                                }
+
+                                var company = vm.account.company;
+
+                                company.companyTypeId = info.companyTypeId;
+                                company.companySizeId = info.companySizeId;
+                                company.type = company.types[info.companyTypeId];
+                                company.personNum = company.personNums[info.companySizeId];
+
+                                //setCompanyOption();
+                            }
+                        }
+                    })
+            },
+            submitOrder: function () { }, //æäº¤éœ€æ±‚ TODO
+            showSearch: function () {
+                var vm = this;
+                //console.log('test');
+                vm.show.search = true;
+                //vm.setCurrentPage('search');
+            } //æ˜¾ç¤ºæœç´¢æ 
         },
         components: {
-            companyfooter: { template: '#companyfooter' },
-            helporder: { template: '#helporder' },
-            //indexheader: { template: '#indexheader' }
+            companyfooter: { template: '#companyfooter' }
         },
-        //template: {
-        //    helporder: '#helporder'
-        //},
         created: function () {
             var vm = this;
+            vm.setCurrencity();
             vm.getBanner();
             vm.queryCaseByCondition(1);
             vm.queryProdutionByCondition(1);

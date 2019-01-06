@@ -210,3 +210,18 @@ i {
     background-image: -webkit-linear-gradient( 0deg, rgb(227,114,62) 0%, rgb(230,142,65) 40%, rgb(233,170,67) 100%);
     background-image: -ms-linear-gradient( 0deg, rgb(227,114,62) 0%, rgb(230,142,65) 40%, rgb(233,170,67) 100%);
 }
+
+.certifi_list li {
+    background-image: url("/m/images/dot_img.png");
+    background-repeat: no-repeat;
+    background-size: .13333rem;
+    background-position: left center;
+    padding-left: .26667rem;
+    line-height: .8rem;
+    color: #888888;
+    overflow: hidden;
+}
+
+.search .header_search {
+    background-position: 8rem center;
+}

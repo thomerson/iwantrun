@@ -72,4 +72,15 @@ mui.ready(function() {
     list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
     //create
     window.indexedList = new mui.IndexedList(list);
+
+    var currentcity = jQuery.cookie('currentcity');
+    if (currentcity) {
+        $('#currentcity').text(currentcity);
+    }
 });
+
+function cityClickFn(el) {
+    var currentcity = $(el).text();
+    $('#currentcity').text(currentcity);
+    jQuery.cookie('currentcity', currentcity);
+}
