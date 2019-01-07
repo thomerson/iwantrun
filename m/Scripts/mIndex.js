@@ -149,7 +149,19 @@ var appIndex = new Vue(
                         activitytype: [],
                         personNum: []
                     },
-                    cases: [],
+                    list: [],
+                    showbtnmore: true
+                },
+                listproduction: {
+                    searchlist: {},
+                    param: {
+                        pageIndex: 1,
+                        pageSize: 10,
+                        duration: [],
+                        activitytype: [],
+                        personNum: []
+                    },
+                    list: [],
                     showbtnmore: true
                 }
             },
@@ -205,10 +217,12 @@ var appIndex = new Vue(
                 var init = {
                     listcase: function () {
                         //if (!vm.model.listcase.searchlist) {
+                        vm.resetCase();
                         vm.getcaseSearchList();
                         vm.queryCase();
                         //}
                     }
+
                 };
                 if (typeof init[page] === 'function') {
                     init[page]();
@@ -236,7 +250,7 @@ var appIndex = new Vue(
                 axios.post(url, param).then(
                     function (response) {
                         //console.log(response.data);
-                        vm.model.index.cases = response.data.content;
+                        vm.model.index.list = response.data.content;
                     })
             },
             queryProdutionByCondition: function (pageIndex) {
@@ -491,7 +505,7 @@ var appIndex = new Vue(
                 axios.post(url, param).then(
                     function (response) {
                         //console.log(response.data);
-                        vm.model.listcase.cases = response.data.content;
+                        vm.model.listcase.list = response.data.content;
                         vm.model.listcase.showbtnmore = response.data.content.length == vm.model.listcase.param.pageSize;
                     })
             },
