@@ -30,6 +30,11 @@
             -webkit-transform: rotate(0deg);
             transition: transform .5s;
         }
+        .input-active{
+            -webkit-box-shadow: 0 0 .17333rem 0 #fa491d;
+            -moz-box-shadow: 0 0 .17333rem 0 #fa491d;
+            box-shadow: 0 0 .17333rem 0 #fa491d
+        }
     </style>
 </head>
 <body class="bgcffffff">
@@ -69,13 +74,13 @@
         <div class="w670 ml40 mt40 pb40 bs-0-0-6-0-dddddd br10">
             <div class="w596 m0a">
                 <div class="pt40 pb20"><span style="color: #fd5509;">*</span>联系方式</div>
-                <div class="w596 h78 br45 bgcf5f5f5 m0a tac">
+                <div class="w596 h78 br45 bgcf5f5f5 m0a tac input-active bs-0-0-6-0-dddddd">
                     <input type="text" class="w520 h60 lh60 mt8" placeholder="请输入您的联系电话"/>
                 </div>
             </div>
             <div class="w596 m0a">
                 <div class="pt40 pb20"><span style="color: #fd5509;">*</span>活动类型</div>
-                <div class="w596 h78 br45 bgcf5f5f5 m0a tac">
+                <div class="w596 h78 br45 bgcf5f5f5 m0a tac input-active">
                     <select class="w520 h60 lh60 mt8">
                         <option value="0">请选择您要的活动类型</option>
                         <option value="1">类型1</option>
