@@ -69,7 +69,6 @@
         },
         created: function () {
             var vm = this;
-            pageHandler();
             vm.getuser();
         }
     });

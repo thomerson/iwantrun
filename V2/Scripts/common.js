@@ -1,57 +1,4 @@
-﻿var validate = {
-    isMobile: function (mobile) {
-        if (!mobile) {
-            return '请输入手机号';
-        }
-        var regex = new RegExp('[1][3578]\\d{9}', 'gim');
-        var is = regex.test(mobile);
-        if (!is) {
-            return '手机号无效，请重新输入';
-        }
-        return null;
-    },
-    validatePwd: function (password) {
-        if (!password) {
-            return "请输入密码";
-        }
-
-        var length = password.length;
-        if (length < 8 || length > 16) {
-            return "密码长度必须大于等于8位，小于等于16位";
-        }
-
-        //	var regex = new RegExp('(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}', 'g');
-        //	var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[!@#$%^&*]+)|([a-zA-Z]+.*[!@#$%^&*]+.*[0-9]+)|([0-9]+.*[!@#$%^&*]+.*[a-zA-Z]+)|([0-9]+.*[a-zA-Z]+.*[!@#$%^&*]+)|([!@#$%^&*]+.*[a-zA-Z]+.*[0-9]+)|([!@#$%^&*]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
-        var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
-            '|([a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+)' +
-            '|([0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+)' +
-            '|([0-9]+.*[a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
-            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+.*[0-9]+)' +
-            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
-        var correct = regex.test(password);
-        if (!correct) {
-            return '密码格式不正确，请重新输入';
-        }
-    },
-    validateSMScode: function (smsCode) {
-        if (!smsCode) {
-            return '请输入短信验证码';
-        }
-        var regex = new RegExp('\\d{6}', 'g');
-        var correct = regex.test(smsCode);
-        if (!correct) {
-            return '短信验证码格式不正确，请重新输入';
-        }
-    }
-};
-
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
-}
-
-var baseUrl = '';
+﻿var baseUrl = '';
 var requestUrl = {
     //Release
     //queryProdutionByCondition: baseUrl + 'production/queryProdutionByCondition',
@@ -119,6 +66,58 @@ var requestUrl = {
 //dev
 axios.post = axios.get;
 
+var validate = {
+    isMobile: function (mobile) {
+        if (!mobile) {
+            return '请输入手机号';
+        }
+        var regex = new RegExp('[1][3578]\\d{9}', 'gim');
+        var is = regex.test(mobile);
+        if (!is) {
+            return '手机号无效，请重新输入';
+        }
+        return null;
+    },
+    validatePwd: function (password) {
+        if (!password) {
+            return "请输入密码";
+        }
+
+        var length = password.length;
+        if (length < 8 || length > 16) {
+            return "密码长度必须大于等于8位，小于等于16位";
+        }
+
+        //	var regex = new RegExp('(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}', 'g');
+        //	var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[!@#$%^&*]+)|([a-zA-Z]+.*[!@#$%^&*]+.*[0-9]+)|([0-9]+.*[!@#$%^&*]+.*[a-zA-Z]+)|([0-9]+.*[a-zA-Z]+.*[!@#$%^&*]+)|([!@#$%^&*]+.*[a-zA-Z]+.*[0-9]+)|([!@#$%^&*]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
+        var regex = new RegExp('^([a-zA-Z]+.*[0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
+            '|([a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+)' +
+            '|([0-9]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+)' +
+            '|([0-9]+.*[a-zA-Z]+.*[~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+)' +
+            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[a-zA-Z]+.*[0-9]+)' +
+            '|([~`@#$%^&*\\-_=+|\?/()<>\\[\\]{}\",.;\'!]+.*[0-9]+.*[a-zA-Z]+)$', 'g');
+        var correct = regex.test(password);
+        if (!correct) {
+            return '密码格式不正确，请重新输入';
+        }
+    },
+    validateSMScode: function (smsCode) {
+        if (!smsCode) {
+            return '请输入短信验证码';
+        }
+        var regex = new RegExp('\\d{6}', 'g');
+        var correct = regex.test(smsCode);
+        if (!correct) {
+            return '短信验证码格式不正确，请重新输入';
+        }
+    }
+};
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
 
 function setCurrentCity(callback) {
     city = jQuery.cookie('currentcity');

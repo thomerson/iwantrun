@@ -1,0 +1,5 @@
+1.请使用V2版本
+2.目前使用的是用json文件模拟请求的,
+	实际调动接口时请将scripts文件夹中common.js中requestUrl 改为实际请求地址
+	注释掉axios.post = axios.get;
+

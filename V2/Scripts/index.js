@@ -96,6 +96,14 @@ var appIndex = new Vue(
                 vm.currentcity = city;
             });
 
+            login.callback = function () {
+                vm.loginId = jQuery.cookie('loginId');
+                vm.accessToken = jQuery.cookie('accessToken');
+                sildemenu.loginId = jQuery.cookie('loginId');
+                sildemenu.accessToken = jQuery.cookie('accessToken');
+                console.log(vm.accessToken);
+            };
+
             vm.getBanner();
             vm.queryCaseByCondition(1);
             vm.queryProdutionByCondition(1);
