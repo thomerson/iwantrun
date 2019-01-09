@@ -1,5 +1,5 @@
 ﻿var searchtemplate = ''
-    + '<div class="search pf bgcffffff w100p h100p pf t0 l0" style="z-index: 100">                            '
+    + '<div class="search pf bgcffffff w100p h100p pf t0 l0" style="z-index: 100" v-show="show">                            '
     + '<div class="pf bgcffffff w100p h100p pf t0 l0" style="z-index: 777">     '
     + '    <header class="w100p h172 bgcffffff pf t0 l0">                                                                   '
     + '        <div class="w668 h70 bgcf5f5f5 br45 header_search pa t80 l40">                                               '

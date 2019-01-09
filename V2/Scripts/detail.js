@@ -41,7 +41,7 @@
                 axios.post(url, param).then(
                     function (response) {
                         console.log(response.data);
-                        vm.model.data = response.data;
+                        vm.model.data = $.parseJSON(response.data.caseVo);
                     })
             },
         },

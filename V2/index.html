@@ -30,7 +30,7 @@
             <section class="w100p mt140 ofh">
                 <div class="swiper-container">
                     <div class="swiper-wrapper ">
-                        <div v-for="(item,index) in model.index.bannerList" :class="index>0?'swiper-slide w100p h100p swiper-slide-center none-effect':'swiper-slide'">
+                        <div v-for="(item,index) in model.bannerList" :class="index>0?'swiper-slide w100p h100p swiper-slide-center none-effect':'swiper-slide'">
                             <a href="javascript:void(0)">
                                 <img :src="item.filePath">
                             </a>
@@ -43,13 +43,13 @@
 
             <!--pannel-->
             <ul class="run_menu page">
-                <li :class="model.index.currentmenu=='prodution'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='prodution'">
+                <li :class="model.currentmenu=='prodution'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.currentmenu='prodution'">
                     <a href="javascript:void(0)" class="db fz28 c333333">找方案 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
-                <li :class="model.index.currentmenu=='location'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='location'">
+                <li :class="model.currentmenu=='location'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.currentmenu='location'">
                     <a href="javascript:void(0)" class="db fz28 c333333">看场地 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
-                <li :class="model.index.currentmenu=='case'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.index.currentmenu='case'">
+                <li :class="model.currentmenu=='case'?'dib w140 h80 lh80 tac pr run_actives':'dib w140 h80 lh80 tac pr '" @click="model.currentmenu='case'">
                     <a href="javascript:void(0)" class="db fz28 c333333">看案例 <i class="w12 h12 br50p pa t16 r40 dn" style="background-color: #f6b03e;"></i></a>
                 </li>
             </ul>
@@ -57,9 +57,9 @@
             <!--list-->
             <div>
                 <!--方案-->
-                <section v-show="model.index.currentmenu=='prodution'" class="li_list w100p bgcffffff mt-4 pb40 ">
+                <section v-show="model.currentmenu=='prodution'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
-                        <li class="pb200 pr" v-for="item in model.index.productions">
+                        <li class="pb200 pr" v-for="item in model.productions">
                             <div class="w48 h92 pa t-10 r80">
                                 <img src="images/label_new.png" class="object-fit-cover" alt="">
                             </div>
@@ -74,9 +74,7 @@
                                 </div>
                             </div>
                             <div class="w570 h240 pa b40 l90">
-                                <a>
-                                    <img :src="item.mainImageLarge" class="object-fit-cover" alt="">
-                                </a>
+                                <img @click="linktoDetail(item.id,'product')" :src="item.mainImageLarge" class="object-fit-cover" alt="">
                             </div>
                         </li>
                     </ul>
@@ -91,7 +89,7 @@
                         <a href="listproduction.html" class="arrow-icon fz26 caaaaaa lh50 fr">全部</a>
                     </div>
                     <ul class="pt40 ml30 mr30 ofh">
-                        <li class="h450 pr fl" style="width: 50%" v-for="item in model.index.productions">
+                        <li class="h450 pr fl" style="width: 50%" v-for="item in model.productions">
                             <div class="w324 h366 bgcffffff bs-0-0-6-0-dddddd br10 m0a">
                                 <div class="fz28 fw700 pl30 pt30 w264 mult-line-ellipsis-1">{{item.name}}</div>
                                 <div class="pl30 pr30 pt10 fz22">
@@ -106,23 +104,23 @@
                                 </div>
                             </div>
                             <div class="w210 h148 pa b40 l70">
-                                <img :src="item.mainImageIcon" class="object-fit-cover" alt="">
+                                <img @click="linktoDetail(item.id,'product')" :src="item.mainImageIcon" class="object-fit-cover" alt="">
                             </div>
                         </li>
                     </ul>
                     <a href="listproduction.html" class="db w670 h86 lh86 tac b1se5e5e5 br10 fz28 c666666 m0a">查看全部方案</a>
                 </section>
                 <!--场地-->
-                <section v-show="model.index.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 ">
+                <section v-show="model.currentmenu=='location'" class="li_list w100p bgcffffff mt-4 pb40 ">
                     <ul class="pt40">
-                        <li class="mb34" v-for="item in model.index.locations">
+                        <li class="mb34" v-for="item in model.locations">
                             <div class="w670 h392 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
                                 <div class="ofh">
                                     <div class="w254 h254 br20 ml22 mt22 fl pr">
                                         <div class="w130 h104 pa t0 l0">
                                             <img src="images/label_tuijian.png" class="object-fit-cover" alt="">
                                         </div>
-                                        <img :src="item.descirbeText2" class="object-fit-cover" alt="">
+                                        <img @click="linktoDetail(item.id,'location')" :src="item.descirbeText2" class="object-fit-cover" alt="">
                                     </div>
                                     <div class="fl w382">
                                         <div class="fz32 fw700 pl30 pt30 w382 mult-line-ellipsis-1">{{item.name}}</div>
@@ -160,11 +158,11 @@
                         <a href="listlocation.html" class="arrow-icon fz26 caaaaaa lh50 fr">全部</a>
                     </div>
                     <ul class="pt40">
-                        <li class="mb34" v-for="item in model.index.locations">
+                        <li class="mb34" v-for="item in model.locations">
                             <div class="w670 h392 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
                                 <div class="ofh">
                                     <div class="w254 h254 br20 ml22 mt22 fl pr">
-                                        <img :src="item.descirbeText2" class="object-fit-cover" alt="">
+                                        <img @click="linktoDetail(item.id,'location')" :src="item.descirbeText2" class="object-fit-cover" alt="">
                                     </div>
                                     <div class="fl w382">
                                         <div class="fz32 fw700 pl30 pt30 w382 mult-line-ellipsis-1">{{item.name}}</div>
@@ -196,12 +194,12 @@
                     <a href="listlocation.html" class="db w670 h86 lh86 tac b1se5e5e5 br10 fz28 c666666 m0a">查看全部场地</a>
                 </section>
                 <!--案例-->
-                <section v-show="model.index.currentmenu=='case'" class="li_list w100p bgcffffff mt-4 pb40">
+                <section v-show="model.currentmenu=='case'" class="li_list w100p bgcffffff mt-4 pb40">
                     <ul class="pt40">
-                        <li class="mb34" v-for="item in model.index.list">
+                        <li class="mb34" v-for="item in model.list">
                             <div class="w670 h504 bgcffffff bs-0-0-6-0-dddddd br10 m0a ">
                                 <div class="w100p h328">
-                                    <img :src="item.descirbeText2" class="object-fit-cover" alt="">
+                                    <img @click="linktoDetail(item.id,'case')" :src="item.descirbeText2" class="object-fit-cover" alt="">
                                 </div>
 
                                 <div class="fz32 fw700 pl30 pt20 w534 mult-line-ellipsis-1">{{item.name}}</div>
@@ -238,7 +236,7 @@
                         <a href="listcase.html" class="arrow-icon fz26 caaaaaa lh50 fr">全部</a>
                     </div>
                     <ul class="pt40">
-                        <li class="h550 pr" v-for="item in model.index.cases">
+                        <li class="h550 pr" v-for="item in model.cases">
                             <div class="w670 h366 bgcffffff bs-0-0-6-0-dddddd br10 m0a">
                                 <div class="fz32 fw700 pl30 pt30 w534 mult-line-ellipsis-1">{{item.name}}</div>
                                 <div class="pl30 pr30 pt30 fz18">
@@ -250,7 +248,7 @@
                                 </div>
                             </div>
                             <div class="w570 h240 pa b40 l90">
-                                <img :src="item.descirbeText2" class="object-fit-cover" alt="">
+                                <img @click="linktoDetail(item.id,'case')" :src="item.descirbeText2" class="object-fit-cover" alt="">
                             </div>
                         </li>
                     </ul>
@@ -283,6 +281,10 @@
     </div>
     <div id="sildemenu">
         <sildemenu></sildemenu>
+    </div>
+
+    <div id="search">
+        <search></search>
     </div>
 
     <script src="js/jquery.min.js"></script>

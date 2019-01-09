@@ -32,23 +32,23 @@ var appIndex = new Vue(
                 filter.show = true;
             },
             linktoDetail: function (id) {
-                location.href = 'detail.html?id=' + id + '&type=case';
+                location.href = 'detail.html?id=' + id + '&type=product';
             },
-            query: function () {
-                var vm = this, url = requestUrl.queryCaseByCondition, param = vm.model.param;
-                param.pageIndex = vm.model.page.pageIndex - 1;
-                param.pageSize = vm.model.page.pageSize;
-                axios.post(url, param).then(function (response) {
-                    //console.log(response.data);
-                    vm.model.list = response.data.content;
-                    vm.model.showbtnmore = response.data.content.length == vm.model.param.pageSize;
-                })
+            query: function (pageIndex) {
+                var vm = this, url = requestUrl.queryProdutionByCondition, param = vm.model.param;
+                //param.pageIndex = pageIndex - 1;
+                axios.post(url, param).then(
+                    function (response) {
+                        //console.log(response.data);
+                        vm.model.list = response.data.content;
+                        vm.model.showbtnmore = response.data.content.length == vm.model.param.pageSize;
+                    })
             },
             getMore: function () {
                 var vm = this;
-                vm.model.page.pageIndex += 1;
+                vm.model.param.pageIndex += 1;
                 vm.query();
-            }
+            },
         },
         components: {
             companyfooter: companyfooter,
