@@ -49,14 +49,18 @@ var appIndex = new Vue(
                     showbtnmore: true
                 }
             },
-            show: {
-                sildeMenu: false,
-                search: false,
-                filter: false
-            },
             currentcity: '上海'
         },
         methods: {
+            showSlidemenu: function () {
+                sildemenu.show = true;
+            },
+            showSearch: function () {
+                search.show = true;
+            },
+            showFilter: function () {
+                filter.show = true;
+            },
             queryCaseByCondition: function (pageIndex) {
                 var vm = this, url = requestUrl.queryCaseByCondition, param = {};
                 param.pageIndex = pageIndex - 1;
@@ -65,25 +69,6 @@ var appIndex = new Vue(
                         //console.log(response.data);
                         vm.model.index.list = response.data.content;
                     })
-            },
-            getcaseSearchList: function () {
-                var vm = this, url = requestUrl.caseSearchList, param = { name: 'common' };
-                axios.post(url, param).then(
-                    function (response) {
-                        console.log(response.data);
-                        vm.model.listcase.searchlist = response.data;
-                    })
-            },
-            resetCase: function () {
-                var vm = this;
-                vm.model.listcase.param = {
-                    pageIndex: 0,
-                    pageSize: 10,
-                    duration: [],
-                    activitytype: [],
-                    personNum: []
-                };
-                $('.icon-checkbox-blank').removeClass('icon-checkbox-blank');
             },
             queryCase: function (pageIndex) {
                 var vm = this, url = requestUrl.queryCaseByCondition, param = vm.model.listcase.param;
@@ -117,44 +102,32 @@ var appIndex = new Vue(
                 vm.queryCase("1");
 
             },
-            durationchange: function ($event, id) {
-                var vm = this, $dom = $($event.target);
-                console.log($dom);
-                if ($dom.hasClass('icon-checkbox-blank')) {
-                    $dom.removeClass('icon-checkbox-blank');
-                    var index = vm.model.listcase.param.duration.indexOf(id);
-                    vm.model.listcase.param.duration.splice(index, 1);
-                } else {
-                    $dom.addClass('icon-checkbox-blank');
-                    vm.model.listcase.param.duration.push(id);
-                }
-                vm.queryCase("1");
-            },
-            personNumchange: function ($event, id) {
-                var vm = this, $dom = $($event.target);
-                console.log($dom);
-                if ($dom.hasClass('icon-checkbox-blank')) {
-                    $dom.removeClass('icon-checkbox-blank');
-                    var index = vm.model.listcase.param.personNum.indexOf(id);
-                    vm.model.listcase.param.personNum.splice(index, 1);
-                } else {
-                    $dom.addClass('icon-checkbox-blank');
-                    vm.model.listcase.param.personNum.push(id);
-                }
-                vm.queryCase("1");
-            },
         },
         components: {
             companyfooter: companyfooter,
-            helporder: helporder
+            helporder: helporder,
+            login: login,
+            sildemenu: sildemenu,
+            filter: filter,
+            search: search
         },
         created: function () {
             var vm = this;
-            vm.resetCase();
-            vm.getcaseSearchList();
             vm.queryCase();
             setCurrentCity(function (city) {
                 vm.currentcity = city;
             });
+
+            login.callback = function () {
+                vm.loginId = jQuery.cookie('loginId');
+                vm.accessToken = jQuery.cookie('accessToken');
+                sildemenu.loginId = jQuery.cookie('loginId');
+                sildemenu.accessToken = jQuery.cookie('accessToken');
+                console.log(vm.accessToken);
+            };
+
+            filter.callback = function (data) {
+                console.log(data);
+            }
         }
     });

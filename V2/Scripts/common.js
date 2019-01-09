@@ -119,11 +119,6 @@ var requestUrl = {
 //dev
 axios.post = axios.get;
 
-function pageHandler() {
-    if (!jQuery.cookie('loginId') || !jQuery.cookie('accessToken')) {
-        location.href = 'login.html'
-    }
-}
 
 function setCurrentCity(callback) {
     city = jQuery.cookie('currentcity');
@@ -135,3 +130,28 @@ function setCurrentCity(callback) {
         callback(city);
     }
 }
+
+
+///查询条件
+var queryListByField = {
+    activityTypeList: {
+        url: requestUrl.activityTypeList,
+        param: { "name": "common", "used_field": 9, "field": "activityTypeList" }
+    },
+    companyTypeList: {
+        url: requestUrl.companyTypeList,
+        param: { "name": "common", "used_field": 24, "field": "companyTypeList" }
+    },
+    groupNumberList: {
+        url: requestUrl.groupNumberList,
+        param: { "name": "common", "used_field": 22, "field": "groupNumberList" }
+    },
+    durationList: {
+        url: requestUrl.durationList,
+        param: { "name": "common", "used_field": 23, "field": "durationList" }
+    },
+    provinceList: {
+        url: requestUrl.provinceList,
+        param: { "name": "common", "used_field": 6, "field": "provinceList" }
+    }
+};

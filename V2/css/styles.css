@@ -5,7 +5,7 @@
 /*头部*/
 .home_header {
     border-radius: 0 0 10px 10px;
-    z-index: 666;
+    z-index: 99;
 }
 
 .location_area {
@@ -234,4 +234,9 @@ i {
     -webkit-box-shadow: 0 0 .17333rem 0 #fa491d;
     -moz-box-shadow: 0 0 .17333rem 0 #fa491d;
     box-shadow: 0 0 .17333rem 0 #fa491d
+}
+
+.filter .select-num {
+    background-color: #fdefd8;
+    border-color: #f6b03e !important;
 }

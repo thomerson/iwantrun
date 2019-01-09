@@ -47,7 +47,7 @@
     + '                <div class="sildeBg w100p h100p bgcffffff op60" @click="show=false"></div>              '
     + '    </div>';
 
-
+//依赖login 
 var sildemenu = new Vue({
     el: '#sildemenu',
     template: sildemenutemplate,

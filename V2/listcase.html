@@ -16,11 +16,11 @@
         <div class="listcase">
             <!--搜索拦-->
             <header class="home_header w100p h126 bgcffffff bs-0-0-6-0-dddddd pf t0 l0">
-                <a href="select_location.html" class="fz28 ml30 lh126 c333333 location_area">{{currentcity}}</a>
+                <a href="city.html" class="fz28 ml30 lh126 c333333 location_area">{{currentcity}}</a>
                 <div class="w500 h56 bgcf5f5f5 br45 header_search pa t34 l150">
                     <input type="text" @focus="show.search=true" class="w456 h40 lh40 mt8 fl pl30 pr30 fz26" placeholder="产品、场地、案例" />
                 </div>
-                <a class="fr mr30 mt40" href="javascript:void(0)" @click="show.sildeMenu=true">
+                <a class="fr mr30 mt40" href="javascript:void(0)" @click="showSlidemenu">
                     <img src="images/icon_menu_btn.png" class="w26 h26" alt="">
                 </a>
             </header>
@@ -29,7 +29,7 @@
                 <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">团建</span>
                 <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">户外行</span>
                 <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">户外行</span>
-                <i class="db fr w42 h32"><img src="images/selct_type_icon.png" @click="show.filter=true" class="object-fit-cover" alt=""></i>
+                <i class="db fr w42 h32"><img src="images/selct_type_icon.png" @click="showFilter" class="object-fit-cover" alt=""></i>
             </section>
 
             <section class=" w100p bgcffffff  pb40">
@@ -45,8 +45,8 @@
                                 <p>{{item.designDuringCo}} /{{item.groupNumber}}</p>
                             </div>
                             <!--<div class="pl30 pr30 pt10 fz34" style="color: #fd5509">
-                                ￥200<span class="fz20">/人起</span>
-                            </div>-->
+                            ￥200<span class="fz20">/人起</span>
+                        </div>-->
                         </div>
                         <div class="w210 h148 pa b40 l70">
                             <img :src="item.descirbeText2" class="object-fit-cover" alt="">
@@ -57,17 +57,36 @@
                 <a href="javascript:void(0)" @click="getMoreCase" v-show="model.listcase.showbtnmore" class=" db w670 h86 lh86 tac fz28 c666666 m0a">点击查看更多</a>
             </section>
 
-            <div id="companyfooter">
-                <companyfooter></companyfooter>
-            </div>
+            <companyfooter></companyfooter>
 
             <!--帮您定制悬浮-->
-            <div id="helporder">
-                <helporder></helporder>
-            </div>
+            <a href="javascript:void(0)" class="db w120 h254 pf b200 r40" @click="setCurrentPage('order')">
+                <img src="images/icon_dz_btn.png" class="object-fit-cover" alt="">
+            </a>
         </div>
     </div>
   
+    <div id="companyfooter">
+        <companyfooter></companyfooter>
+    </div>
+    <div id="helporder">
+        <helporder></helporder>
+    </div>
+    <div id="login">
+        <login></login>
+    </div>
+    <div id="sildemenu">
+        <sildemenu></sildemenu>
+    </div>
+   
+    <div id="filter">
+        <filter></filter>
+    </div>
+    <div id="search">
+        <search></search>
+    </div>
+
+
     <script src="js/jquery.min.js"></script>
     <script src="js/change_font_size.js"></script>
     <script src="js/vue.min.js"></script>
@@ -77,6 +96,10 @@
     <script src="Scripts/common.js"></script>
     <script src="template/companyfooter.js"></script>
     <script src="template/helporder.js"></script>
+    <script src="template/login.js"></script>
+    <script src="template/sildemenu.js"></script>
+    <script src="template/filter.js"></script>
+    <script src="template/search.js"></script>
     <script src="Scripts/listcase.js"></script>
 </body>
 </html>
