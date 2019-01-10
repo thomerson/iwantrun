@@ -17,7 +17,7 @@ var requestUrl = {
     //findMixedByLoginId: baseUrl + 'purchaserAccount/findMixedByLoginId',
     //verify: baseUrl + 'token/verify',
     //getSMSCode: baseUrl + 'smsCode/getSMSCode',
-    //getProductionDetailsById: baseUrl + 'product/getDetailsById',
+    //getProductionDetailsById: baseUrl + 'production/getDetailsById',
     //getCaseDetailsById: baseUrl + 'case/getDetailsById',
     //getLocationDetailsById: baseUrl + 'location/getDetailsById',
     //fileupload: baseUrl + 'remote/fileupload',

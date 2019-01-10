@@ -5,7 +5,7 @@
     + '  <img src="images/logo_icon.png" class="object-fit-cover fl" alt="logo">'
     + '            </div>'
     + '<div class="tac fz30 mt30 mb30" style="color: #f08200;">'
-    + '  这里想放一句,类似平台的slogn'
+    + '  企业运动服务专家'
     + '        </div>'
     + '  <div class="w670 h2 bgcf5f5f5 m0a op70"></div>'
     + '    <div class="tac mt30">'
