@@ -8,6 +8,8 @@
             nickname: jQuery.cookie('loginId'),
             phone: jQuery.cookie('loginId'),
             company: {
+                types: { 0: '', 1: '国企', 2: '民营', 3: '外企' },
+                personNums: { 0: '', 1: '1~10人', 2: '10~50人', 3: '50人以上' },
                 licenses: []
             }
         },
@@ -53,6 +55,10 @@
                         }
                     }
                 })
+        },
+        update: function ($event) {
+            var vm = this, url = requestUrl.addAndModifyInfo, $dom = $($event.target);
+
         }
     },
     created: function () {

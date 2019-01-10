@@ -113,10 +113,13 @@
                                 规模
 
                             </div>
-                            <input class="fl fz30 c333333 lh60 c111111" type="text" value="200人" placeholder="请输入公司规模" />
-                            <!--<div class="fl fz30 c333333 lh60">200人-->
-                            <!--</div>-->
-                            <!--<img src="images/arrow_right_b.png" class="w14 h28 fr mr30 mt14" alt="">-->
+                            <select class="fl fz30 caaaaaa w400 lh60 c111111" v-model="account.sex">
+                                <option value="0">未选择</option>
+                                <option value="1">1~10人</option>
+                                <option value="2">10~50人</option>
+                                <option value="3">50人以上</option>
+                            </select>
+                            <img src="images/arrow_right_b.png" class="w14 h28 fr mr30 mt14" alt="">
                         </a>
                     </li>
                     <li class="pt20 pb20 ofh bb1se5e5e5">
@@ -124,9 +127,13 @@
                             <div class="w140 ml30 mr30 fl fz30 c888888 lh60">
                                 经营类型
                             </div>
-                            <input class="fl fz30 c333333 lh60 c111111" type="text" value="互联网软件" placeholder="请输入经营类型" />
-                            <!--<div class="fl fz30 c333333 lh60">互联网软件</div>-->
-                            <!--<img src="images/arrow_right_b.png" class="w14 h28 fr mr30 mt14" alt="">-->
+                            <select class="fl fz30 caaaaaa w400 lh60 c111111" v-model="account.sex">
+                                <option value="0">未选择</option>
+                                <option value="1">国企</option>
+                                <option value="2">民营</option>
+                                <option value="3">外企</option>
+                            </select>
+                            <img src="images/arrow_right_b.png" class="w14 h28 fr mr30 mt14" alt="">
                         </a>
                     </li>
 

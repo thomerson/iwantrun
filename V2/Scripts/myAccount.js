@@ -7,17 +7,7 @@
             headimg: 'images/head_img.png',
             nickname: jQuery.cookie('loginId'),
             phone: jQuery.cookie('loginId'),
-            company: {
-                types: { 0: '', 1: '国企', 2: '民营', 3: '外企' },
-                personNums: { 0: '', 1: '1~10人', 2: '10~50人', 3: '50人以上' }
-                //name: '上海沐跑科技有限公司',
-                //licenses: [],
-                //hasCredential: false,
-                //companyTypeId: 0,
-                //companySizeId: 10,
-                //type: '互联网软件',
-                //personNum: 200
-            },
+            company: {},
             ordersTotal: 0,
             favouriteTotal: 0
         },
