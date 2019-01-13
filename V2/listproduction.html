@@ -36,10 +36,8 @@
                 </a>
             </header>
             <section class="mt130 bgcffffff w100p fz26 lh54 pl40 pr40 pt24 fh">
-                <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">会场</span>
-                <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">体育场</span>
-                <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">别墅区</span>
-                <span class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">户外</span>
+                <span class="dib h54"> </span>
+                <button v-for="item in model.searchlist" @click="remove(item)" class="dib h54 pl30 pr30 bgcf5f5f5 c888888 br30 mr10">{{item.name}}</button>
                 <i class="db fr w42 h32"><img src="images/selct_type_icon.png" @click="showFilter" class="object-fit-cover" alt=""></i>
             </section>
 

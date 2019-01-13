@@ -9,7 +9,8 @@ var appIndex = new Vue({
             param: {
                 duration: [],
                 activitytype: [],
-                personNum: []
+                personNum: [],
+                specialTagsCode: []
             },
             page: {
                 pageIndex: 1,
@@ -50,6 +51,27 @@ var appIndex = new Vue({
             vm.model.param.pageIndex += 1;
             vm.query();
         },
+        remove: function (item) {
+            var vm = this;
+            var idx = vm.model.searchlist.indexOf(item);
+            vm.model.searchlist.splice(idx, 1);
+
+            console.log('-----list remove');
+            console.log(vm.model.param[item.type]);
+            //param
+            $.each(vm.model.param[item.type], function (index, it) {
+                console.log(it);
+                if (it.id == item.id) {
+                    vm.model.param[item.type].splice(index, 1);
+                }
+            });
+            console.log(vm.model.param[item.type]);
+            console.log('-----list remove');
+
+            filter.remove(item);
+            vm.model.page.pageIndex = 1;
+            vm.query();
+        }
     },
     components: {
         companyfooter: companyfooter,
@@ -74,11 +96,25 @@ var appIndex = new Vue({
             console.log(vm.accessToken);
         };
 
+        filter.type = 'production';
+        
         filter.callback = function (data) {
             console.log(data);
-            vm.model.param = data;
+            vm.model.param = {};
+            vm.model.searchlist = [];
+            $.each(data, function (key, value) {
+                if (Array.isArray(value) && value.length > 0) {
+                    vm.model.param[key] = value;
+                    $.each(value, function (index, item) {
+                        vm.model.searchlist.push({ type: key, id: item.id, name: item.value });
+                    });
+                }
+            });
             vm.model.page.pageIndex = 1;
+            //console.log(vm.model.param);
+            //console.log(vm.model.searchlist);
             vm.query();
         }
+        filter.init();
     }
 });

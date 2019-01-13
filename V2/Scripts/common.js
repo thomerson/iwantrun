@@ -185,8 +185,8 @@ function fileUpload(contentId, url, uploadFile, callback) {
     $.ajax({
         url: url,
         data: data,
-        //type: "post",
-        type: "get", //DEV
+        type: "post",
+        //type: "get", //DEV
         dataType: "text",
         cache: false,
         processData: false,// 用于对data参数进行序列化处理 这里必须false
