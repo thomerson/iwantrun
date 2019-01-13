@@ -1,18 +1,15 @@
 TODO
-1.首页
-	合作单位 图片缩放 边框效果
-2.个人资料编辑 头像上传和信息保存
-3.实际接口联调
 4.过滤操作返回页面 list 加上筛选条件过滤  以及上面抬头的过滤条件
-5.detail页面显示有问题 Check  block
+5.detail页面显示有问题 Check  block 加入喜欢
 6.城市自动定位
 7.微信登录  block
 8.分页效果  check
+3.实际接口联调
+4.我的账号  实际收藏数
 
 BLOCK
 1.详情页 心愿单
 2.微信登录 
-3.
 
 TOAsk
 1.忘记密码 接口有么  如何实现
@@ -21,13 +18,10 @@ TOAsk
 
 
 TOMakeSure
-1、Solgan是：企业运动服务专家 OK 
 2、微信登陆和PC端保持一致，目前PC端微信登陆正在申请新的公众号
 3、忘记密码沿用立即注册的页面设计
 4、热门推荐/猜您喜欢 暂时不做
 5、“心愿单”就是PC端提交需求时“感兴趣的产品、场地、案例”，之后PC端也会完善该功能； 
-5、咨询电话是“4008897003”
-6、“设置”按钮去掉
 7、“我的订单”需要做，我会联系设计师设计，但是要等一段时间
 8、不需要做待付款
 
@@ -47,3 +41,29 @@ TOMakeSure
 目前使用的是用json文件模拟请求的,
 	实际调动接口时请将scripts文件夹中common.js中requestUrl 改为实际请求地址
 	注释掉axios.post = axios.get;
+	修改文件上传请求方式 get->post
+
+3.移动和web的自动跳转
+
+添加
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+
+var baseUrl = "";
+if (IsPC) {
+    window.location.href = baseUrl;
+} else {
+    window.location.href = baseUrl + 'm/index.html'
+}

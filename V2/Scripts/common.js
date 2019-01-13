@@ -1,4 +1,26 @@
-﻿var baseUrl = '';
+﻿
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+
+//var baseUrl = "";
+//if (IsPC) {
+//    window.location.href = baseUrl;
+//} else {
+//    window.location.href = baseUrl + 'html/m/index.html'
+//}
+
 var requestUrl = {
     //Release
     //queryProdutionByCondition: baseUrl + 'production/queryProdutionByCondition',
@@ -60,7 +82,7 @@ var requestUrl = {
     provinceList: 'Json/provinceList.json',
     orderSubmit: 'Json/orderSubmit.json',
     getOrderListByLoginId: 'Json/getOrderListByLoginId.json',
-    favourite: 'Json/favourite.json',
+    favourite: 'Json/favourite.json'
 };
 
 //dev
@@ -154,3 +176,25 @@ var queryListByField = {
         param: { "name": "common", "used_field": 6, "field": "provinceList" }
     }
 };
+
+//文件上传
+function fileUpload(contentId, url, uploadFile, callback) {
+    var formData = new FormData();
+    formData.append('fileUpload', uploadFile);
+    var data = formData;
+    $.ajax({
+        url: url,
+        data: data,
+        //type: "post",
+        type: "get", //DEV
+        dataType: "text",
+        cache: false,
+        processData: false,// 用于对data参数进行序列化处理 这里必须false
+        contentType: false, // 必须
+        success: function (result) {
+            if (typeof callback === 'function') {
+                callback(result);
+            }
+        }
+    });
+}

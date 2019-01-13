@@ -30,18 +30,18 @@
     + '</a>                                                                                         '
     + '</li>                                                                                            '
     + '<li class="tac lh100">                                                                           '
-    + '  <a href="###">                                                                               '
+    + '  <a href="tel:4008897003">                                                                               '
     + '    <img src="images/menu_icon_03.png" class="w36 h36" alt="">                               '
     + '      <span class="fz30 c333333">联系我们</span>                                           '
     + '</a>                                                                                         '
-    + '</li>                                                                                            '
-    + '                    <li class="tac lh100">                                                                        '
-    + '                        <a href="###">                                                                            '
-    + '                            <img src="images/menu_icon_04.png" class="w36 h36" alt="">                            '
-    + '                                <span class="fz30 c333333">设置</span>                                            '
-    + '                    </a>                                                                                          '
-    + '                </li>                                                                                             '
-    + '                                                                                                                  '
+    //+ '</li>                                                                                            '
+    //+ '                    <li class="tac lh100">                                                                        '
+    //+ '                        <a href="###">                                                                            '
+    //+ '                            <img src="images/menu_icon_04.png" class="w36 h36" alt="">                            '
+    //+ '                                <span class="fz30 c333333">设置</span>                                            '
+    //+ '                    </a>                                                                                          '
+    //+ '                </li>                                                                                             '
+    //+ '                                                                                                                  '
     + '            </ul>                                                                                                 '
     + '        </div>                                                                                                    '
     + '                <div class="sildeBg w100p h100p bgcffffff op60" @click="show=false"></div>              '
@@ -59,7 +59,7 @@ var sildemenu = new Vue({
             headimg: 'images/head_img.png',
             nickname: jQuery.cookie('loginId'),
             phone: jQuery.cookie('loginId'),
-            company: { }
+            company: { licenses: []}
         }
     },
     components: {

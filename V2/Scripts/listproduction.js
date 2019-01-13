@@ -5,7 +5,7 @@ var appIndex = new Vue({
         loginId: jQuery.cookie('loginId'),
         accessToken: jQuery.cookie('accessToken'),
         model: {
-            searchlist: {},
+            searchlist: [],
             param: {
                 duration: [],
                 activitytype: [],
@@ -39,8 +39,10 @@ var appIndex = new Vue({
             axios.post(url, param).then(
                 function (response) {
                     //console.log(response.data);
-                    vm.model.list = response.data.content;
-                    vm.model.showbtnmore = response.data.content.length == vm.model.param.pageSize;
+                    if (Array.isArray(response.data.content)) {
+                        vm.model.list = vm.model.list.concat(response.data.content);
+                        vm.model.showbtnmore = vm.model.list.length < response.data.pageInfo.total;
+                    }
                 })
         },
         getMore: function () {
