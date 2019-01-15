@@ -65,8 +65,8 @@
         <section class="w750 h124 bgcffffff pf b0 l0 bs-0-0-6-0-dddddd ofh">
             <a href="javascript:void(0)" @click="changeFavourite" class="db w160 tac fl mt20 yes-c">
                 <div class="w44 h44 m0a">
-                    <!--<img src="images/icon_detail_01.png" class="object-fit-cover" alt="">-->
-                    <img src="images/icon_detail_01a.png" class="object-fit-cover" alt="">
+                    <img v-show="!model.isFavourite" src="images/icon_detail_01.png" class="object-fit-cover" alt="">
+                    <img v-show="model.isFavourite" src="images/icon_detail_01a.png" class="object-fit-cover" alt="">
                 </div>
                 <div class="fz24 c888888 mt6">收藏</div>
             </a>
