@@ -86,7 +86,7 @@ var requestUrl = {
     getOrderListByLoginId: 'Json/getOrderListByLoginId.json',
     favouriteQuery: 'Json/favourite.json',
     favouriteAdd: 'Json/favouriteAdd.json',
-    favouriteDelete: 'favourite/delete',
+    favouriteDelete: 'Json/favouriteDelete.json'
 };
 
 //dev
