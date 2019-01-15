@@ -51,7 +51,9 @@ var requestUrl = {
     //provinceList:baseUrl + 'dictionary/queryListByField',
     //orderSubmit:baseUrl + 'orders/submit',
     //getOrderListByLoginId:baseUrl + 'orders/getOrderListByLoginId',
-    //favourite:baseUrl + 'favourite/query',
+    //favouriteQuery:baseUrl + 'favourite/query',
+    //favouriteAdd:baseUrl + 'favourite/add',
+    //favouriteDelete:baseUrl + 'favourite/delete',
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -82,7 +84,9 @@ var requestUrl = {
     provinceList: 'Json/provinceList.json',
     orderSubmit: 'Json/orderSubmit.json',
     getOrderListByLoginId: 'Json/getOrderListByLoginId.json',
-    favourite: 'Json/favourite.json'
+    favouriteQuery: 'Json/favourite.json',
+    favouriteAdd: 'Json/favouriteAdd.json',
+    favouriteDelete: 'favourite/delete',
 };
 
 //dev
