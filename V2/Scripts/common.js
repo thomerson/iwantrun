@@ -54,6 +54,7 @@ var requestUrl = {
     //favouriteQuery:baseUrl + 'favourite/query',
     //favouriteAdd:baseUrl + 'favourite/add',
     //favouriteDelete:baseUrl + 'favourite/delete',
+    //modifyPwd:baseUrl + 'purchaserAccount/modifyPwd',
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -86,7 +87,8 @@ var requestUrl = {
     getOrderListByLoginId: 'Json/getOrderListByLoginId.json',
     favouriteQuery: 'Json/favourite.json',
     favouriteAdd: 'Json/favouriteAdd.json',
-    favouriteDelete: 'Json/favouriteDelete.json'
+    favouriteDelete: 'Json/favouriteDelete.json',
+    modifyPwd: 'Json/modifyPwd.json',
 };
 
 //dev
@@ -148,11 +150,21 @@ function getUrlParam(name) {
 function setCurrentCity(callback) {
     city = jQuery.cookie('currentcity');
     if (!city) {
-        //获取当前位置信息
-        city = '上海'// TODO
-    }
-    if (typeof (callback) === 'function') {
-        callback(city);
+          //city = '上海'// TODO
+        $.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function () {
+            console.log(returnCitySN)
+            var name = returnCitySN.cname, index = name.indexOf('市');
+            city = name.substr(0, index);
+            console.log(city);
+            jQuery.cookie('currentcity', city);
+            if (typeof (callback) === 'function') {
+                callback(city);
+            }
+        });  
+    } else {
+        if (typeof (callback) === 'function') {
+            callback(city);
+        }
     }
 }
 
