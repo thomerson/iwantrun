@@ -15,7 +15,7 @@ function IsPC() {
 }
 
 //var baseUrl = "";
-//if (IsPC) {
+//if (IsPC()) {
 //    window.location.href = baseUrl;
 //} else {
 //    window.location.href = baseUrl + 'html/m/index.html'
@@ -55,6 +55,7 @@ var requestUrl = {
     //favouriteAdd:baseUrl + 'favourite/add',
     //favouriteDelete:baseUrl + 'favourite/delete',
     //modifyPwd:baseUrl + 'purchaserAccount/modifyPwd',
+    //getWeixingConfig: baseUrl + 'weixing/getWeixingConfig'
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -89,6 +90,7 @@ var requestUrl = {
     favouriteAdd: 'Json/favouriteAdd.json',
     favouriteDelete: 'Json/favouriteDelete.json',
     modifyPwd: 'Json/modifyPwd.json',
+    getWeixingConfig: 'Json/getWeixingConfig.json'
 };
 
 //dev
@@ -150,7 +152,7 @@ function getUrlParam(name) {
 function setCurrentCity(callback) {
     city = jQuery.cookie('currentcity');
     if (!city) {
-          //city = '上海'// TODO
+        //city = '上海'// TODO
         $.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function () {
             console.log(returnCitySN)
             var name = returnCitySN.cname, index = name.indexOf('市');
@@ -160,7 +162,7 @@ function setCurrentCity(callback) {
             if (typeof (callback) === 'function') {
                 callback(city);
             }
-        });  
+        });
     } else {
         if (typeof (callback) === 'function') {
             callback(city);
