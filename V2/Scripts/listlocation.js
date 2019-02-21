@@ -38,12 +38,16 @@ var appIndex = new Vue({
         },
         query: function (pageIndex) {
             var vm = this, url = requestUrl.querylocationByCondition, param = vm.model.param;
-            axios.post(url, param).then(
-                function (response) {
-                    //console.log(response.data);
-                    vm.model.list = response.data.content;
-                    vm.model.showbtnmore = response.data.content.length == vm.model.param.pageSize;
-                })
+            axios.post(url, param).then(function (response) {
+                //console.log(response.data);
+                if (vm.model.param.pageIndex === 0) {
+                    vm.model.list = [];
+                }
+                if (Array.isArray(response.data.content)) {
+                    vm.model.list = vm.model.list.concat(response.data.content);
+                    vm.model.showbtnmore = vm.model.list.length < response.data.pageInfo.total;
+                }
+            });
         },
         getMore: function () {
             var vm = this;
