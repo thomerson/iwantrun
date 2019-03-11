@@ -94,8 +94,8 @@ var appIndex = new Vue(
                     $(".more-info").hide(500);
                     $(".arrowBtn img").addClass("rotate0").removeClass("rotate180");
                 }
-
             });
+
 
 
             var vm = this;
