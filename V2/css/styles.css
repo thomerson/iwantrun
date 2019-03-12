@@ -268,3 +268,15 @@ i {
 .coll_arr_up{
     background-image: url("../images/arrow_up_s.png")!important;
 }
+
+.su_content p:before{
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #cccccc;
+    display: block;
+    position: absolute;
+    top: 14px;
+    left: 12px;
+}
