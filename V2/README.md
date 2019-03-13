@@ -1,6 +1,9 @@
 TODO
-1.Page pageindex
-2.
+1.collection OK
+2.about us  翻译拿到 文字图片
+3.心愿清单的接口
+4.我的订单
+
 
 
 BUG

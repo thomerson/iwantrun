@@ -10,50 +10,39 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-
     </style>
 </head>
 <body class="bgcffffff">
-    <div class="aboutus_header pr">
-        <div class="w750 h312"><img src="images/about_banner.jpg" class="object-fit-cover" alt=""></div>
+    <div id="container">
+        <div class="aboutus_header pr">
+            <div class="w750 h312"><img src="images/about_banner.jpg" class="object-fit-cover" alt=""></div>
+        </div>
+        <div class="aboutus_content">
+            <label class="db fz30 mt40 mb30 ml50 fw700">公司简介</label>
+            <div class="fz26 lh44 ml50 mr50" style="text-indent: 2em;">
+                上海沐跑是一家专注企业拓展团建、线上/线下运动赛事、及运动专业装备销售的公司，致力为广大企事业单位提供一站式活动策划执行服务。
+            </div>
+            <div class="w650 ml50 h2 mt40 mb40" style="border-bottom:1px dashed #cccccc;"></div>
+            <label class="db fz30 mt40 mb30 ml50 fw700">联系电话</label>
+            <div class="fz26 lh44 ml50 mr50">
+                <a href="tel:4008897003" class="db c333333">400-8897-003</a>
+                <a href="tel:02161152728" class="db c333333">021-61152728</a>
+            </div>
+        </div>
     </div>
-    <div class="aboutus_content">
-        <label class="db fz30 mt40 mb30 ml50 fw700">公司简介</label>
-        <div class="fz26 lh44 ml50 mr50" style="text-indent: 2em;">
-            上海沐跑是一家专注企业拓展团建、线上/线下运动赛事、及运动专业装备销售的公司，致力为广大企事业单位提供一站式活动策划执行服务。
-        </div>
-        <div class="w650 ml50 h2 mt40 mb40" style="border-bottom:1px dashed #cccccc;"></div>
-        <label class="db fz30 mt40 mb30 ml50 fw700">联系电话</label>
-        <div class="fz26 lh44 ml50 mr50">
-            <a href="tel:4008897003" class="db c333333">400-8897-003</a>
-            <a href="tel:02161152728" class="db c333333">021-61152728</a>
-        </div>
+
+    <div id="companyfooter">
+        <companyfooter></companyfooter>
     </div>
-
-    <footer class="w100p h368 bgcffffff pa b0 l0">
-        <div class="w100p h368 pt40 home_footer">
-            <div class="w218 h64 m0a ofh">
-                <img src="images/logo_icon.png" class="object-fit-cover fl" alt="logo">
-            </div>
-            <div class="tac fz30 mt30 mb30" style="color: #f08200;">
-                这里想放一句,类似平台的slogn
-            </div>
-            <div class="w670 h2 bgcf5f5f5 m0a op70"></div>
-
-            <div class="tac mt30">
-                <a href="tel:0000000" class="fz30 cffffff op60 lh30 mr30"><img src="images/icon_tel.png" class="w30 h30 mr10" alt="">联系我们</a>
-                <a href="###" class="fz30 cffffff op60 lh30"><img src="images/icon_aboutus.png" class="w30 h30 mr10" alt="">关于我们</a>
-            </div>
-            <div class="tac fz20 cffffff op50 mt10">
-                上海沐跑信息科技有限公司 <br/>
-                北京ICP备0000000号
-            </div>
-
-        </div>
-
-    </footer>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/change_font_size.js"></script>
+
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+    <script src="Scripts/common.js"></script>
+    <script src="template/companyfooter.js"></script>
 </body>
 </html>
