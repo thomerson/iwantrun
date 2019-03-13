@@ -77,12 +77,12 @@
             });
         },
         linktoDetail: function (id, type) {
-            location.href = 'detail.html?id=' + id + '&type=' + type ||'product';
+            location.href = 'detail.html?id=' + id + '&type=' + type || 'product';
         }
     },
     created: function () {
         if (!jQuery.cookie('accessToken')) {
-            window.history.back();
+            window.location.href = 'index.html';
         }
         var vm = this;
         vm.getFavourite();
