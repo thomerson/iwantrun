@@ -140,6 +140,9 @@ var appIndex = new Vue(
                     vm.collection.location.list = response.data.content;
                 })
             },
+            linktoDetail: function (id, type) {
+                location.href = 'detail.html?id=' + id + '&type=' + type || 'product';
+            }
         },
         components: {
             companyfooter: companyfooter,
