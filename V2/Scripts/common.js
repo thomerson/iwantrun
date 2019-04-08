@@ -56,7 +56,10 @@ var requestUrl = {
     //favouriteAdd:baseUrl + 'favourite/add',
     //favouriteDelete:baseUrl + 'favourite/delete',
     //modifyPwd:baseUrl + 'purchaserAccount/modifyPwd',
-    //getWeixingConfig: baseUrl + 'weixing/getWeixingConfig'
+    //getWeixingConfig: baseUrl + 'weixing/getWeixingConfig',
+    //casesmobileQuery:baseUrl+'case/mobileQuery',
+    //locationmobileQuery:baseUrl+'location/mobileQuery',
+    //productionInfomobileQuery:baseUrl+'productionInfo/mobileQuery',
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -92,7 +95,10 @@ var requestUrl = {
     favouriteAdd: 'Json/favouriteAdd.json',
     favouriteDelete: 'Json/favouriteDelete.json',
     modifyPwd: 'Json/modifyPwd.json',
-    getWeixingConfig: 'Json/getWeixingConfig.json'
+    getWeixingConfig: 'Json/getWeixingConfig.json',
+    casesmobileQuery: 'Json/casesmobileQuery.json',
+    locationmobileQuery: 'Json/locationmobileQuery.json',
+    productionInfomobileQuery: 'Json/productionInfomobileQuery.json',
 };
 
 //dev
@@ -154,7 +160,6 @@ function getUrlParam(name) {
 function setCurrentCity(callback) {
     city = jQuery.cookie('currentcity');
     if (!city) {
-        //city = '上海'// TODO
         $.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function () {
             console.log(returnCitySN)
             var name = returnCitySN.cname, index = name.indexOf('市');
