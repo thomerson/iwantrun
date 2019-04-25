@@ -44,7 +44,7 @@ TODO
 16.
 
 git pull
-mvn install-Dmaven.test.skip=true
+mvn install -Dmaven.test.skip=true
 mvn spring-boot:run
 
 

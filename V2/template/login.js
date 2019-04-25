@@ -6,6 +6,8 @@
     + '         <img src="images/close_icon_a.png" class="w24 h24" alt="">                                                                                                                                                             '
     + '             </a>                                                                                                                                                                                                               '
     + '         </header >                                                                                                                                                                                                             '
+    //非微信登陆
+    + '<div v-show="model.showTab!=\'bindphone\'">'
     + ' <nav class="mt100 w670 ml40 pt18 ofh">                                                                                                                                                                                         '
     + '     <a :class="model.showTab==\'login\'?\'c333333 fz30 fl ml30 mr30 login-active\':\'c333333 fz30 fl ml30 mr30 \'" href="javascript:void(0)" @click="switchLogin(\'login\')">登 录</a>                                                      '
     + ' <a :class="model.showTab==\'register\'?\'c333333 fz30 fl ml30 mr30 login-active\':\'c333333 fz30 fl ml30 mr30\'" href="javascript:void(0)" @click="switchLogin(\'register\')" > 注 册</a >                                                        '
@@ -148,14 +150,57 @@
     //+ '         <a href="javascript:;" class="ml30 mr30">                                                                                                                                                                              '
     //+ '             <img src="images/icon_qq.png" class="w80 h80" alt="">                                                                                                                                                              '
     //+ '                 </a>                                                                                                                                                                                                           '
-    + '             <a href="javascript:;" class="ml30 mr30">                                                                                                                                                                          '
+    + '             <a href="javascript:;" @click="wechatLogin" class="ml30 mr30">                                                                                                                                                                          '
     + '                 <img src="images/icon_weixin.png" class="w80 h80" alt="">                                                                                                                                                      '
     + '                 </a>                                                                                                                                                                                                           '
     + '             </div>                                                                                                                                                                                                             '
     + '         </section>   '
     + '          </div>  '
+    //微信登陆绑手机号
+    + '<div v-show="model.showTab==\'bindphone\'">'
+    + ' <nav class="mt100 w670 ml40 pt18 ofh">                                                                                                                                                                                         '
+    + '     <a class="c333333 fz30 fl ml30 mr30 login-active" href="javascript:void(0)" >绑定手机号</a>                                                      '
+    + '         </nav >                                                                                                                                                                                                                '
+    + ' <section class="pr re_party">                                                                                                                                                                    '
+    + '     <div class="w750 h690 pa t0 l0 zi1"><img src="images/login_bg_02.png" class="object-fit-cover" alt=""></div>                                                                                                               '
+    + '         <div class="tac pt40 pr zi2">                                                                                                                                                                                          '
+    + '             <div class="login_area_02 pt40">                                                                                                                                                                                   '
+    + '                 <div class="w596 h78 br10 bgcf5f5f5 m0a tac">                                                                                                                                                                  '
+    + '                     <input type="text" class="w540 h60 lh60 mt8" v-model="loginId" placeholder="请输入手机号" />                                                                                                               '
+    + '                 </div>                                                                                                                                                                                                         '
+    + '                 <div class="w596 m0a ofh">                                                                                                                                                                                     '
+    + '                     <div class="w412 h78 br10 bgcf5f5f5 tac mt30 fl">                                                                                                                                                          '
+    + '                         <input type="text" class="w350 h60 lh60 mt8" v-model="model.smsCode" placeholder="请输入验证码" />                                                                                                     '
+    + '                     </div>                                                                                                                                                                                                     '
+    + '                     <div class="w184 h78 lh78 tac fl mt30">                                                                                                                                                                    '
+    + '                         <a href="javascript:void(0)" style="color: #f6b03e" @click="sendVerifyCode">{{ SMS.btnText }}</a>                                                                                                      '
+    + '                 </div>                                                                                                                                                                                                         '
+    + '             </div>                                                                                                                                                                                                             '
+    + '             <div class="w596 m0a ofh">                                                                                                                                                                                         '
+    + '                 <div class="w596 h78 br10 bgcf5f5f5 mt30 tac">                                                                                                                                                                 '
+    + '                     <input type="password" v-model="model.password" class="w540 h60 lh60 mt8" placeholder="请输入密码" />                                                                                                      '
+    + '                 </div>                                                                                                                                                                                                         '
+    + '             </div>                                                                                                                                                                                                             '
+    + '             <div class="w596 m0a ofh">                                                                                                                                                                                         '
+    + '                 <div class="w596 h78 br10 bgcf5f5f5 mt30 tac">                                                                                                                                                                 '
+    + '                     <input type="password" v-model="model.rePassword" class="w540 h60 lh60 mt8" placeholder="请再次输入密码" />                                                                                                      '
+    + '                 </div>                                                                                                                                                                                                         '
+    + '             </div>                                                                                                                                                                                                             '
+    + '             <div class="w596 m0a ofh">                                                                                                                                                                                         '
+    + '                 <span class="c888888 fz22 mt20 fl">*8-20个字符：可由数字、字母、符号组成</span>                                                                                                                                '
+    + '             </div>                                                                                                                                                                                                             '
+    + '             <div class="w596 m0a ofh" v-show="model.errMsg">                                                                                                                                                                   '
+    + '                 <span style="color:red;" class="c888888 fz22 mt20 fl">{{ model.errMsg }}</span>                                                                                                                                '
+    + '             </div>                                                                                                                                                                                                             '
+    + '             <div class="w596 m0a ofh">                                                                                                                                                                                         '
+    + '                 <a href="javascript:void(0)" @click="wechatBindPhone" class="db w596 h78 lh78 tac cffffff fz36 login_btn fl mt76">绑定登录</a>                                                                                      '
+    + '         </div>                                                                                                                                                                                                                 '
+    + '     </div>                                                                                                                                                                                                                     '
+    + '             </div>                                                                                                                                                                                                             '
+    + '         </section >                                                                                                                                                                                                            '
+    + '          </div>  '
+    + '     </div>'
     + '     </div>';
-
 
 var login = new Vue({
     el: '#login',
@@ -179,6 +224,7 @@ var login = new Vue({
             count: 0,
             btnText: '发送验证码'
         },
+        wechatInfo: null,
         callback: null
     },
     methods: {
@@ -299,6 +345,7 @@ var login = new Vue({
             var vm = this;
             jQuery.cookie('loginId', '');
             jQuery.cookie('accessToken', '');
+            jQuery.cookie('openId', '');
             vm.loginId = '';
             vm.accessToken = '';
             vm.show = false;
@@ -348,7 +395,7 @@ var login = new Vue({
                 if (messageBody) {
                     var message = JSON.parse(messageBody);
                     vm.model.errMsg = message.errorMsg;
-                   
+
                     if (vm.model.errMsg) {
                         return;
                     }
@@ -406,6 +453,71 @@ var login = new Vue({
                 }
             });
 
+        },
+        wechatLogin: function () {
+            var appid = 'wx1fd018c55846c8c9';
+            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+            window.location.href = url;
+        },
+        wechatCallback: function () {
+            var vm = this, openId = jQuery.cookie('openId'), param = vm.wechatInfo, url = requestUrl.mobileWeixinCallBack + '?openId=' + openId;//微信登陆回调
+            if (param) {
+                axios.post(url, param).then(function (response) {
+                    console.log(response.data);
+                    var data = response.data;
+                    if (data && data.token) {
+                        vm.accessToken = data.token;
+                        jQuery.cookie('loginId', vm.loginId);
+                        jQuery.cookie('accessToken', data.token);
+                        vm.show = false;
+                        if (typeof vm.callback === 'function') {
+                            vm.callback();
+                        }
+                    }
+                });
+            }
+        },
+        wechatBindPhone: function () {//TODO 验证码和密码
+            var vm = this, openId = jQuery.cookie('openId');
+            var url = requestUrl.bindMobileNumber + '?openId=' + openId + '&mobileNumber=' + vm.loginId;//微信号绑手机号
+            axios.post(url).then(function (response) {
+                console.log(response.data);
+                if (response.data) {
+                    vm.wechatCallback();
+                }
+            });
+        }
+    },
+    created: function () {
+        var vm = this, code = getUrlParam('code');
+        if (code && !vm.accessToken) {
+            var url = requestUrl.getMobileWeixinOpenid + '?code=' + code;
+            axios.post(url).then(function (response) {
+                console.log(response.data);
+                console.log(vm);
+                var data = response.data;
+                if (data && data.openid) {
+                    jQuery.cookie('openId', data.openid);
+                    vm.wechatInfo = data;
+                    var openId = data.openid, url = requestUrl.checkMobileOpenIdExists + '?openId=' + openId;//判断微信号是否绑过手机号
+                    if (openId) {
+                        axios.post(url).then(function (response) {
+                            console.log(vm);
+                            console.log(response.data);
+                            if (!response.data) { //绑定手机号
+                                vm.show = true;
+                                vm.model.showTab = 'bindphone';
+                            } else {
+                                var data = response.data;
+                                if (data && data.mobileNumber) {
+                                    jQuery.cookie('loginId', data.mobileNumber);
+                                    vm.wechatCallback();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 })
