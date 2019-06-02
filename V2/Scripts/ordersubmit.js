@@ -31,17 +31,20 @@ var appIndex = new Vue(
                 product: {
                     list: [],
                     pageIndex: 0,
-                    pageSize: 3
+                    pageSize: 3,
+                    showbtnmore: false
                 },
                 case: {
                     list: [],
                     pageIndex: 0,
-                    pageSize: 3
+                    pageSize: 3,
+                    showbtnmore: false
                 },
                 location: {
                     list: [],
                     pageIndex: 0,
-                    pageSize: 3
+                    pageSize: 3,
+                    showbtnmore: false
                 }
             },
             styleClass: {
@@ -114,7 +117,7 @@ var appIndex = new Vue(
             changeTab: function (tab) {
                 var vm = this;
                 vm.tab = tab || 'product';
-                vm.queryFavourite();
+                vm.wishcartQuery();
             },
             queryCaseByCondition: function () {
                 var vm = this, url = requestUrl.queryCaseByCondition, param = {
@@ -150,33 +153,70 @@ var appIndex = new Vue(
                 location.href = 'detail.html?id=' + id + '&type=' + type || 'product';
             },
             removeWant: function (id, type) {
-                var vm = this, url = requestUrl.favouriteDelete, param = {
+                var vm = this, type = type === 'product' ? 'production' : type;
+                var url = requestUrl.wishcartDelete, param = {
                     id: id,
-                    type: type
+                    type: type,
+                    loginId: vm.loginId
                 };
                 axios.post(url, param).then(function (response) {
                     console.log(response.data);
                     if (response.data == 'success') {
-                        vm.queryFavourite(true);
+                        vm.wishcartQuery(true);
                     }
                 });
             },//移除心愿清单
-            queryFavourite: function (refresh) {
-                var vm = this, url = requestUrl.favouriteQuery, param = {
-                    type: vm.tab
+            wishcartQuery: function (refresh) {
+                var vm = this, type = vm.tab === 'product' ? 'production' : vm.tab;
+                var url = requestUrl.wishcartQuery, param = {
+                    type: type,
+                    loginId: vm.loginId,
+                    pageIndex: vm.collection[vm.tab].pageIndex,
+                    pageSize: vm.collection[vm.tab].pageSize
                 };
-                if (!!!refresh && vm.collection[vm.tab].list.length >0) {
+
+                var getDetailById = {
+                    Production: requestUrl.getProductionDetailsById,
+                    Case: requestUrl.getCaseDetailsById,
+                    Location: requestUrl.getLocationDetailsById
+                };
+
+                if (!!!refresh && vm.collection[vm.tab].list.length > 0) {
                     return;
+                }
+                if (!!refresh) {
+                    vm.collection[vm.tab].list = [];
                 }
                 axios.post(url, param).then(function (response) {
                     console.log(response.data);
                     if (response.data && Array.isArray(response.data.content)) {
-                        vm.collection[vm.tab].list = response.data.content;
+                        $.each(response.data.content, function (index, item) {
+                            var getUrl = getDetailById[item.type] + '?id=' + item.typeId;
+                            axios.post(getUrl, {}).then(function (response) {
+                                console.log(response.data);
+                                item.class = response.data;
+                                item.type = item.type.toLowerCase();
+                                item.type = item.type === 'production' ? 'product' : item.type;
+                                //vm.collection[item.type].list.push(item);
+                                //$.each(vm.collection[item.type].list, function (ind, val) {
+                                //    val.model = item;
+                                //});
+                                console.log(vm.collection[item.type]);
+                            });
+                        });
+                        vm.collection[vm.tab].list = vm.collection[vm.tab].list.concat(response.data.content);
+
+                        vm.collection[vm.tab].showbtnmore = vm.collection[vm.tab].list.length < response.data.pageInfo.total;
                     } else {
                         vm.collection[vm.tab].list = [];
                     }
                 });
-            }
+            },
+            getMore: function () {
+                var vm = this;
+                vm.collection[vm.tab].pageIndex += 1;
+                vm.wishcartQuery();
+            },
         },
         components: {
             companyfooter: companyfooter,
@@ -198,12 +238,11 @@ var appIndex = new Vue(
             //vm.login.show
             $.each(queryListByField, function (key, value) {
                 var url = value.url + '?name=' + value.param["name"] + '&used_field=' + value.param["used_field"] + '&field=' + value.param["field"];
-                axios.post(url, {}).then(
-                    function (response) {
-                        //console.log(response.data);
-                        var data = response.data;
-                        vm.model[key] = data;
-                    });
+                axios.post(url, {}).then(function (response) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    vm.model[key] = data;
+                });
             });
 
             login.callback = function () {
@@ -211,10 +250,11 @@ var appIndex = new Vue(
                 vm.accessToken = jQuery.cookie('accessToken');
                 sildemenu.loginId = jQuery.cookie('loginId');
                 sildemenu.accessToken = jQuery.cookie('accessToken');
-                console.log(vm.accessToken);
+                vm.wishcartQuery();
+                //console.log(vm.accessToken);
             };
 
-            vm.queryFavourite();
+         
             //vm.queryCaseByCondition(); //TODO favourite/{query
             //vm.queryProdutionByCondition();
             //vm.queryLocationByCondition();

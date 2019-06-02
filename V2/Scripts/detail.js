@@ -7,7 +7,8 @@
             id: getUrlParam('id'),
             type: getUrlParam('type'),
             data: {},
-            isFavourite: false
+            isFavourite: false,
+            wishId: false,
         }
     },
     methods: {
@@ -54,13 +55,52 @@
                 id: vm.model.id,
                 type: vm.model.type
             };
+            if (!vm.IsValidated) {
+                login.show = true;
+                return;
+            }
             axios.post(url, param).then(function (response) {
                 console.log(response.data);
                 if (response.data == 'success') {
                     vm.model.isFavourite = !vm.model.isFavourite;
                 }
             });
+        },
+        wishcartFindOne: function () {
+            var vm = this, type = vm.model.type === 'product' ? 'production' : vm.model.type;
+            var url = requestUrl.wishcartFindOne, param = {
+                typeId: vm.model.id,
+                loginId: vm.loginId,
+                type: type
+            };
+            axios.post(url, param).then(function (response) {
+                console.log(response.data);
+                if (response.data && response.data.id > 0) {
+                    vm.model.wishId = response.data.id;
+                }
+            });
+        },
+        wishChange: function () {
+            var vm = this, type = vm.model.type === 'product' ? 'production' : vm.model.type;
+            if (!vm.IsValidated) {
+                login.show = true;
+                return;
+            }
+            var url = vm.model.wishId ? requestUrl.wishcartDelete : requestUrl.wishcartAdd, param = {
+                id: vm.model.wishId || vm.model.id,
+                type: type,
+                loginId: vm.loginId
+            };
+            axios.post(url, param).then(function (response) {
+                console.log(response.data);
+                if (response.data && response.data.success) {
+                    vm.model.wishId = vm.model.wishId ? false : response.data.message;
+                }
+            });
         }
+    },
+    components: {
+        login: login
     },
     created: function () {
         var vm = this;
@@ -75,6 +115,22 @@
         if (typeof (init[vm.model.type]) === 'function') {
             init[vm.model.type]();
         }
-        vm.getFavourite();
+       
+
+        login.callback = function () {
+            vm.loginId = jQuery.cookie('loginId');
+            vm.accessToken = jQuery.cookie('accessToken');
+            //console.log(vm.accessToken);
+            vm.getFavourite();
+            vm.wishcartFindOne();
+        };
+        vm.ValidateLogin(function () {
+            if (!vm.IsValidated) {
+                login.show = true;
+            } else {
+                vm.getFavourite();
+                vm.wishcartFindOne();
+            }
+        });
     }
 });

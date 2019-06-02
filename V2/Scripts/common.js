@@ -66,6 +66,12 @@ var requestUrl = {
     //mobileWeixinCallBack:baseUrl+'weixing/mobileWeixinCallBack',
     //bindMobileNumber :baseUrl+'weixing/bindMobileNumber',
     //validateSmsCode :baseUrl+'purchaserAccount/validateSmsCode',
+    //wishcartAdd: baseUrl + 'wishcart/add',
+    //wishcartDelete: baseUrl + 'wishcart/delete',
+    //wishcartFind: baseUrl + 'wishcart/find',
+    //wishcartQuery: baseUrl + 'wishcart/query',
+    //wishcartFindOne: baseUrl + 'wishcart/findOne',
+
 
     //DEV
     queryProdutionByCondition: 'Json/queryProdutionByCondition.json',
@@ -111,6 +117,11 @@ var requestUrl = {
     mobileWeixinCallBack: 'Json/mobileWeixinCallBack.json',
     bindMobileNumber: 'Json/bindMobileNumber.json',
     validateSmsCode: 'Json/validateSmsCode.json',
+    wishcartAdd: 'Json/wishcartAdd.json',
+    wishcartDelete: 'Json/wishcartDelete.json',
+    wishcartFind: 'Json/wishcartFind.json',
+    wishcartQuery: 'Json/wishcartQuery.json',
+    wishcartFindOne: 'Json/wishcartFindOne.json',
 };
 
 //dev
@@ -234,4 +245,23 @@ function fileUpload(contentId, url, uploadFile, callback) {
             }
         }
     });
+}
+
+Vue.prototype.IsValidated = false;
+Vue.prototype.ValidateLogin = function (callback) { //判断是否登录有权限
+    var vm = this, url = requestUrl.findMixedByLoginId, param = {};
+    axios.post(url, param).then(function (response) {
+        //console.log(response.data);
+        var data = response.data;
+        if (data) {
+            var errMsg = data.errMsg;
+            vm.IsValidated = !!errMsg;
+            if (!vm.IsValidated) {
+                jQuery.cookie('accessToken', '');
+            }
+            if (typeof callback === 'function') {
+                callback(response.data)
+            }
+        }
+    })
 }
