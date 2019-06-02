@@ -25,6 +25,7 @@ var appIndex = new Vue(
                 contractMobile: false,
                 activity_code: false
             },
+            showWish: false,
             showDialog: false,
             tab: 'product',
             collection: {
@@ -250,11 +251,18 @@ var appIndex = new Vue(
                 vm.accessToken = jQuery.cookie('accessToken');
                 sildemenu.loginId = jQuery.cookie('loginId');
                 sildemenu.accessToken = jQuery.cookie('accessToken');
+                vm.showWish = true;
                 vm.wishcartQuery();
                 //console.log(vm.accessToken);
             };
 
-         
+            vm.ValidateLogin(function () {
+                vm.showWish = true;
+                vm.wishcartQuery();
+            }, function () {
+                login.show = true;
+            });
+
             //vm.queryCaseByCondition(); //TODO favourite/{query
             //vm.queryProdutionByCondition();
             //vm.queryLocationByCondition();
