@@ -118,7 +118,7 @@ var appIndex = new Vue(
             changeTab: function (tab) {
                 var vm = this;
                 vm.tab = tab || 'product';
-                vm.wishcartQuery();
+                vm.wishcartQuery(false, false);
             },
             queryCaseByCondition: function () {
                 var vm = this, url = requestUrl.queryCaseByCondition, param = {
@@ -163,11 +163,11 @@ var appIndex = new Vue(
                 axios.post(url, param).then(function (response) {
                     console.log(response.data);
                     if (response.data == 'success') {
-                        vm.wishcartQuery(true);
+                        vm.wishcartQuery(true, false);
                     }
                 });
             },//移除心愿清单
-            wishcartQuery: function (refresh) {
+            wishcartQuery: function (refresh, getMore) {
                 var vm = this, type = vm.tab === 'product' ? 'production' : vm.tab;
                 var url = requestUrl.wishcartQuery, param = {
                     type: type,
@@ -182,7 +182,7 @@ var appIndex = new Vue(
                     Location: requestUrl.getLocationDetailsById
                 };
 
-                if (!!!refresh && vm.collection[vm.tab].list.length > 0) {
+                if (!!!refresh && vm.collection[vm.tab].list.length > 0 && !getMore) {
                     return;
                 }
                 if (!!refresh) {
@@ -222,7 +222,7 @@ var appIndex = new Vue(
             getMore: function () {
                 var vm = this;
                 vm.collection[vm.tab].pageIndex += 1;
-                vm.wishcartQuery();
+                vm.wishcartQuery(false, true);
             },
         },
         components: {
@@ -258,13 +258,13 @@ var appIndex = new Vue(
                 sildemenu.loginId = jQuery.cookie('loginId');
                 sildemenu.accessToken = jQuery.cookie('accessToken');
                 vm.showWish = true;
-                vm.wishcartQuery();
+                vm.wishcartQuery(true, false);
                 //console.log(vm.accessToken);
             };
 
             vm.ValidateLogin(function () {
                 vm.showWish = true;
-                vm.wishcartQuery();
+                vm.wishcartQuery(true, false);
             }, function () {
                 login.show = true;
             });
